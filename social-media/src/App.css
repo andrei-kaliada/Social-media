@@ -1,0 +1,22 @@
+.wrapperApp{
+
+  display: grid;
+  grid-template-areas: 
+  "header header"
+  "nav MainContent";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+
+}
+
+.header{
+  grid-area: header;
+}
+
+.nav{
+  grid-area: nav;
+}
+
+.MainContent{
+  grid-area: MainContent;
+}
