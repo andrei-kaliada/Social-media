@@ -6,6 +6,7 @@ import React, { Component } from 'react';
                 <div className="headerWrapper">
                     <div className="headerWrapper__logo">
                       <h1>Logo</h1>
+                     <h2>Hello world</h2>
                     </div>
                 </div>
             </header>
