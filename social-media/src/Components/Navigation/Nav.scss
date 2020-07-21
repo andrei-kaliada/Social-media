@@ -1,0 +1,21 @@
+.nav{
+    
+    background-color: burlywood;
+    padding: 20px;
+
+    &__link{
+        color:#000;
+        a{
+            text-decoration: none;
+            color:#000;
+            
+            
+        }
+
+        &-active{
+            color:red;
+            font-weight: bold;
+        }
+        
+    }
+}

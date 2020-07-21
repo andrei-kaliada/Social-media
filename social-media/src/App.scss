@@ -1,3 +1,13 @@
+*{
+  text-decoration: none;
+  text-transform: none;
+  list-style-type: none;
+}
+
+a{
+  color:#000;
+}
+
 .wrapperApp{
 
   display: grid;
@@ -6,6 +16,12 @@
   "nav MainContent";
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
+
+  &__content{
+    grid-row: "c";
+    
+    
+  }
 
 }
 

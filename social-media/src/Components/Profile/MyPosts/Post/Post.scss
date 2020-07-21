@@ -1,0 +1,17 @@
+.wrapper-post{
+  //   display: grid;
+  //   grid-template-areas: 
+  // "header header"
+  // "nav MainContent";
+  // grid-template-rows: 60px 1fr;
+  // grid-template-columns: repeat(3,1fr);
+
+  &__message{
+
+    &-img{
+      img{
+        border-radius: 50%;
+      }
+    }
+  }
+}
