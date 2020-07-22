@@ -2,19 +2,19 @@ import React from 'react'
 import "./Dialogs.scss";
 import Message from './Message/index';
 import DialogItem from './DialogItem/index';
-import { addMessageActionCreator, updateNewMessageTextActionCreator } from '../../redux/dialogs-reducer';
 
-export default function Dialogs({ dialogsPage, dispatch }) {
+
+export default function Dialogs({ dialogsPage, addMessage, changeMessage }) {
 
     
 
     let addNewMessage = () => {
-        dispatch(addMessageActionCreator());
+        addMessage();
     }
 
     let onChangeMessage = (event) => {
         
-        dispatch(updateNewMessageTextActionCreator(event.target.value));
+        changeMessage(event.target.value);
     }
 
     return (
@@ -35,8 +35,6 @@ export default function Dialogs({ dialogsPage, dispatch }) {
                     <button onClick={addNewMessage}>Send</button>
                 </div>
             </div>
-
-
         </>
     )
 }

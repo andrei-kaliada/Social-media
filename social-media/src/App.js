@@ -4,7 +4,7 @@ import 'normalize.css';
 import Header from './Components/Header/Header';
 import Nav from './Components/Navigation/Nav';
 import Profile from './Components/Profile/Profile';
-import Dialogs from './Components/Dialogs';
+import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
@@ -18,12 +18,10 @@ function App(props) {
           <Route exact path="/" />
           <Route path="/profile"
            render={() => <Profile 
-          dispatch={props.dispatch} 
-          newPostsText={props.state.profilePage.newPostsText}
-          posts={props.state.profilePage.posts}
+          store={props.store}
+          
           />} />
-          <Route path="/dialogs" render={ () => <Dialogs dispatch={props.dispatch}
-           dialogsPage={props.state.dialogsPage} />} />
+          <Route path="/dialogs" render={ () => <DialogsContainer store={props.store} />} />
         </div>
       </div>
     </Router>

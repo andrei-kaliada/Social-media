@@ -6,18 +6,16 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../red
 
 
 
-const MyPosts = ({dispatch, newPostsText, posts}) => {
-    let newPostElement = React.createRef();
+const MyPosts = ({newPostsText, posts,updateNewPostText, addPost}) => {
 
     let addPostElem = () => {
-        let text = newPostElement.current.value;
-        dispatch(addPostActionCreator())
-
+       addPost();
+        
     }
 
     let onPostChange = (event) => {
-        let text = newPostElement.current.value;
-          dispatch(updateNewPostTextActionCreator(text))
+        updateNewPostText(event.target.value);
+      
     }
     
         return (
@@ -27,7 +25,7 @@ const MyPosts = ({dispatch, newPostsText, posts}) => {
                 </div>
                 <div>
                     <div>
-                        <textarea onChange={onPostChange} ref={newPostElement} value={newPostsText}/>
+                        <textarea onChange={onPostChange}  value={newPostsText}/>
                     </div>
                     <div>
                         <button onClick={addPostElem}>Add post</button>
