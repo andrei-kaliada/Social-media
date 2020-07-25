@@ -8,6 +8,8 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../red
 
 const MyPosts = ({newPostsText, posts,updateNewPostText, addPost}) => {
 
+   
+
     let addPostElem = () => {
        addPost();
         

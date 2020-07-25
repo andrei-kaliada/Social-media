@@ -4,26 +4,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/redux-store';
+import {Provider} from 'react-redux';
 
 
-export let renderEntierTree = (state) => {
-   
-ReactDOM.render(
+  ReactDOM.render(
     <React.StrictMode>
-      <App state={state} 
-      dispatch={store.dispatch.bind(store)} 
-      store={store}
-      />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>,
     document.getElementById('root')
   );
-  
-} 
 
-renderEntierTree(store.getState());
-
-store.subscribe(() => {
-  let state = store.getState();
-  renderEntierTree(state);  
-});
 

@@ -6,10 +6,7 @@ const Profile = ({store}) => {
     return (
         <div className="MainContent">
             <ProfileInfo />
-            <MyPostsContainer 
-            store={store}
-            
-              />
+            <MyPostsContainer />
         </div>
     );
 }
