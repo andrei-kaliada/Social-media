@@ -21,6 +21,12 @@ const Nav = () => {
                 >
                     <li>Message</li>
                 </NavLink>
+                <NavLink to="/users"
+                className={classNames('nav__link')}
+                activeClassName="nav__link-active"
+                >
+                    <li>Users</li>
+                </NavLink>
                 {/* <Link to="/">
                     <li>News</li>
                 </Link>

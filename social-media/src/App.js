@@ -5,11 +5,13 @@ import Header from './Components/Header/Header';
 import Nav from './Components/Navigation/Nav';
 import Profile from './Components/Profile/Profile';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
+import UsersContainer from './Components/Users/UsersContainer';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 
-function App(props) {
+function App() {
+
   return (
     <Router>
       <div className="wrapperApp">
@@ -20,6 +22,7 @@ function App(props) {
           <Route path="/profile"
            render={() => <Profile />} />
           <Route path="/dialogs" render={ () => <DialogsContainer />} />
+          <Route path="/users" render={ () => <UsersContainer />} />
         </div>
       </div>
     </Router>
