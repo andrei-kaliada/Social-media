@@ -2,13 +2,14 @@ import React from 'react';
 import userPhoto from '../../assets/images/unnamed.png';
 import classNames from 'classnames/bind';
 import './Users.scss';
+import { NavLink } from 'react-router-dom';
 
 
 let Users = ({props, requestUsers}) =>{
 
     let { users, follow, unfollow,
         setUsers, toggleFollow, pageSize,
-        totalUsersCount, currentPage,setPageNumber
+        totalUsersCount, currentPage,setPageNumber,isFetching
     } = props;
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
@@ -19,6 +20,7 @@ let Users = ({props, requestUsers}) =>{
         pages.push(i);
     }
 
+ 
     return(
         <div>
                 <div>
@@ -36,13 +38,18 @@ let Users = ({props, requestUsers}) =>{
                         ))
                     }
                 </div>
-                {
+               { isFetching ? 
+               
+               <div>
+                    {
                     users && users.map((element) => (
 
                         <div key={element.id}>
                             <span>
                                 <div>
-                                    <img className="userAvatar" src={element.photos.small == null ? userPhoto : element.photos.small} alt="img" />
+                                    <NavLink to={`/profile/${element.id}`}>
+                                        <img className="userAvatar" src={element.photos.small == null ? userPhoto : element.photos.small} alt="img" />
+                                    </NavLink>
                                 </div>
                                 <div>
                                     {/* {element.followed ? 
@@ -79,6 +86,11 @@ let Users = ({props, requestUsers}) =>{
                         </div>
                     ))
                 }
+               </div>
+
+               : 
+               <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+               }
             </div>
     );
 }

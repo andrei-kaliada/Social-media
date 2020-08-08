@@ -1,6 +1,7 @@
 import React from 'react';
 import './ProfileInfo.scss';
 
+
 const ProfileInfo = () => {
     return (
         <>
