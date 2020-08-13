@@ -19,7 +19,7 @@ function App() {
         <Nav />
         <div className="wrapperApp__content">
           <Route exact path="/" />
-          <Route  path="/profile"
+          <Route  path="/profile/:userId?"
            render={() => <ProfileContainer />} />
           <Route path="/dialogs" render={ () => <DialogsContainer />} />
           <Route path="/users" render={ () => <UsersContainer />} />
