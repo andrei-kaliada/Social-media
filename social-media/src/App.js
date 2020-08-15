@@ -6,6 +6,7 @@ import Nav from './Components/Navigation/Nav';
 import ProfileContainer from './Components/Profile/ProfileContainer';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import UsersContainer from './Components/Users/UsersContainer';
+import HeaderContainer from './Components/Header/HeaderContainer';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
@@ -15,7 +16,7 @@ function App() {
   return (
     <Router>
       <div className="wrapperApp">
-        <Header />
+        <HeaderContainer />
         <Nav />
         <div className="wrapperApp__content">
           <Route exact path="/" />

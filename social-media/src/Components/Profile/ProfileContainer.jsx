@@ -9,6 +9,8 @@ class ProfileContainer extends React.Component {
     constructor(props) {
         super(props);
 
+        
+
     }
 
     componentDidMount() {
@@ -21,6 +23,8 @@ class ProfileContainer extends React.Component {
             .then(response => {
                 this.props.setUserProfile(response.data);
             });
+
+              
     }
 
 

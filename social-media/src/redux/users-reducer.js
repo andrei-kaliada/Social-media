@@ -15,6 +15,7 @@ let initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
+
     switch (action.type) {
         case TOGGLE_FOLLOW:return{
             ...state,
