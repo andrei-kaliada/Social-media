@@ -16,6 +16,7 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         let config = {
+            withCredentials:true,
             headers: {
                 'API-KEY': '2f292005-e95d-404f-9882-29787c1d81a0'
             }
@@ -35,6 +36,7 @@ class UsersContainer extends React.Component {
         console.log(this);
         this.props.setPageNumber(element);
         let config = {
+            withCredentials:true,
             headers: {
                 'API-KEY': '2f292005-e95d-404f-9882-29787c1d81a0'
             }
@@ -47,7 +49,40 @@ class UsersContainer extends React.Component {
                 this.props.setUsers(result.data.items);
                 this.props.setFetchingStatus(true);
             });
-          
+  
+    }
+
+    followUser = (id) => {
+        
+        
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,{},{
+            withCredentials:true,
+            headers: {
+                'API-KEY': '2f292005-e95d-404f-9882-29787c1d81a0'
+            }
+        })
+        .then(response => {
+            if(response.data.resultCode === 0){
+                this.props.follow(id);
+            }
+            console.log(response);
+            
+        });
+    }
+
+    unFollowUser = (id) => {
+        
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,{
+            withCredentials:true,
+            headers: {
+                'API-KEY': '2f292005-e95d-404f-9882-29787c1d81a0'
+            }
+        })
+        .then(response =>{
+            if(response.data.resultCode === 0){
+                this.props.unfollow(id);
+            }
+        });
     }
 
   
@@ -58,6 +93,8 @@ class UsersContainer extends React.Component {
             <Users
              props={this.props}
              requestUsers={this.requestUsers}
+             followUser={this.followUser}
+             unFollowUser={this.unFollowUser}
             />
         );
     };

@@ -5,7 +5,7 @@ import './Users.scss';
 import { NavLink } from 'react-router-dom';
 
 
-let Users = ({props, requestUsers}) =>{
+let Users = ({props, requestUsers, followUser,unFollowUser}) =>{
 
     let { users, follow, unfollow,
         setUsers, toggleFollow, pageSize,
@@ -59,7 +59,7 @@ let Users = ({props, requestUsers}) =>{
                                                         : ()=>follow(element.id)}>
                                              {element.followed ? `Unfollow`:`Follow`}
                                          </button> */}
-                                    <button onClick={() => toggleFollow(element.id)}>
+                                    <button onClick={ element.followed ? () => unFollowUser(element.id)  :()=>followUser(element.id)}>
                                         {element.followed ? `Unfollow` : `Follow`}
                                     </button>
                                 </div>
