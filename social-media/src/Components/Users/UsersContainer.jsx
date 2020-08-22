@@ -5,6 +5,7 @@ import {setUsers,follow,
     setFetchingStatus} from '../../redux/users-reducer';
 import axios from 'axios';
 import Users from './Users';
+import {usersAPI} from '../../api/api';
 import {connect} from 'react-redux';
 
 
@@ -15,19 +16,12 @@ class UsersContainer extends React.Component {
     }
 
     componentDidMount() {
-        let config = {
-            withCredentials:true,
-            headers: {
-                'API-KEY': '2f292005-e95d-404f-9882-29787c1d81a0'
-            }
-
-        }
-        this.props.setFetchingStatus(false);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-        , config).then(result => {
-            console.log(result);
-            this.props.setUsers(result.data.items);
-            this.props.getTotalCount(result.data.totalCount);
+      
+        usersAPI.getUsers(this.props.currentPage,this.props.pageSize)
+            .then(data => {
+            console.log(data);
+            this.props.setUsers(data.items);
+            this.props.getTotalCount(data.totalCount);
             this.props.setFetchingStatus(true);
         });
     }
@@ -35,18 +29,12 @@ class UsersContainer extends React.Component {
     requestUsers = (element) =>{
         console.log(this);
         this.props.setPageNumber(element);
-        let config = {
-            withCredentials:true,
-            headers: {
-                'API-KEY': '2f292005-e95d-404f-9882-29787c1d81a0'
-            }
-
-        }
+        
         this.props.setFetchingStatus(false);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${element}&count=${this.props.pageSize}`
-            , config).then(result => {
-                console.log(result);
-                this.props.setUsers(result.data.items);
+        usersAPI.getUsers(element,this.props.pageSize)
+        .then(data => {
+                console.log(data);
+                this.props.setUsers(data.items);
                 this.props.setFetchingStatus(true);
             });
   
