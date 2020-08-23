@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {setUsers,follow, 
     unfollow, toggleFollow,
     setPageNumber,getTotalCount,
-    setFetchingStatus} from '../../redux/users-reducer';
+    setFetchingStatus, toggleDisabledButton} from '../../redux/users-reducer';
 import axios from 'axios';
 import Users from './Users';
-import {usersAPI} from '../../api/api';
+import {usersAPI, followAPI} from '../../api/api';
 import {connect} from 'react-redux';
 
 
@@ -42,35 +42,31 @@ class UsersContainer extends React.Component {
 
     followUser = (id) => {
         
-        
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,{},{
-            withCredentials:true,
-            headers: {
-                'API-KEY': '2f292005-e95d-404f-9882-29787c1d81a0'
-            }
-        })
-        .then(response => {
-            if(response.data.resultCode === 0){
+        this.props.toggleDisabledButton(id,true);
+        followAPI.follow(id)
+        .then(data => {
+            if(data.resultCode === 0){
                 this.props.follow(id);
+               
             }
-            console.log(response);
+            this.props.toggleDisabledButton(id,false);
+            console.log(data);
             
         });
+        
     }
 
     unFollowUser = (id) => {
-        
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,{
-            withCredentials:true,
-            headers: {
-                'API-KEY': '2f292005-e95d-404f-9882-29787c1d81a0'
-            }
-        })
-        .then(response =>{
-            if(response.data.resultCode === 0){
+        this.props.toggleDisabledButton(id,true);
+        followAPI.unFollow(id)
+        .then(data =>{
+            if(data.resultCode === 0){
                 this.props.unfollow(id);
+                
             }
+            this.props.toggleDisabledButton(id,false);
         });
+        
     }
 
   
@@ -83,6 +79,7 @@ class UsersContainer extends React.Component {
              requestUsers={this.requestUsers}
              followUser={this.followUser}
              unFollowUser={this.unFollowUser}
+           
             />
         );
     };
@@ -95,6 +92,7 @@ let mapStateToProps = (state) => {
         totalUsersCount:state.usersPage.totalUsersCount,
         currentPage:state.usersPage.currentPage,
         isFetching:state.usersPage.isFetching,
+        isDisabledBtn:state.usersPage.isDisabledBtn,
     }
 }
 
@@ -136,5 +134,6 @@ export default connect(mapStateToProps,
         setPageNumber,
         getTotalCount,
         setFetchingStatus,
+        toggleDisabledButton
     }
     )(UsersContainer);

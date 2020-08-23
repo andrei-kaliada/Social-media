@@ -9,8 +9,10 @@ let Users = ({props, requestUsers, followUser,unFollowUser}) =>{
 
     let { users, follow, unfollow,
         setUsers, toggleFollow, pageSize,
-        totalUsersCount, currentPage,setPageNumber,isFetching
+        totalUsersCount, currentPage,setPageNumber,isFetching,
+        isDisabledBtn,
     } = props;
+    console.log(isDisabledBtn);
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
 
@@ -59,7 +61,7 @@ let Users = ({props, requestUsers, followUser,unFollowUser}) =>{
                                                         : ()=>follow(element.id)}>
                                              {element.followed ? `Unfollow`:`Follow`}
                                          </button> */}
-                                    <button onClick={ element.followed ? () => unFollowUser(element.id)  :()=>followUser(element.id)}>
+                                    <button disabled={ isDisabledBtn.some(id => id === element.id)} onClick={ element.followed ? () => unFollowUser(element.id)  :()=>followUser(element.id)}>
                                         {element.followed ? `Unfollow` : `Follow`}
                                     </button>
                                 </div>

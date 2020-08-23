@@ -5,13 +5,15 @@ const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 const SELECT_PAGE_NUMBER = 'SELECT_PAGE_NUMBER';
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 const CHANGE_FETCHING_STATUS = 'CHANGE_FETCHING_STATUS';
+const TOGGLE_DISABLED_FOLLOW_BUTTON = 'TOGGLE_DISABLED_FOLLOW_BUTTON';
 
 let initialState = {
     users: [],
     pageSize:5,
     totalUsersCount:0,
     currentPage:1,
-    isFetching:false
+    isFetching:false,
+    isDisabledBtn:[],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -20,7 +22,8 @@ const userReducer = (state = initialState, action) => {
         case TOGGLE_FOLLOW:return{
             ...state,
             users:state.users.map( element => element.id === action.userId ?
-                 {...element, followed:!element.followed}: element)
+                 {...element, followed:!element.followed}: element),
+            
         }
         case FOLLOW:{
             let stateCopy = {
@@ -45,7 +48,11 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 // users:[...state.users] the same
-                users: state.users.map((element) =>action.userId === element.id ?{ ...element,followed: false} : element)
+                users: state.users.map((element) =>action.userId === element.id ?
+                { 
+                    ...element,
+                    followed: false,
+                } : element)
             }
         case SET_USERS:
             return{
@@ -66,6 +73,16 @@ const userReducer = (state = initialState, action) => {
             return{
                 ...state,
                 isFetching:action.status
+            }
+        case TOGGLE_DISABLED_FOLLOW_BUTTON:
+            return{
+                ...state,
+                isDisabledBtn: action.isFetching 
+                ? [...state.isDisabledBtn, action.id]
+                 :state.isDisabledBtn.filter( el => el != action.id)
+                
+                ,
+                
             }
         default: return state;
     }
@@ -121,5 +138,15 @@ export const setFetchingStatus = (status) => {
         status
     }
 }
+
+export const toggleDisabledButton = (id,isFetching) => {
+
+    return{
+        type:TOGGLE_DISABLED_FOLLOW_BUTTON,
+        id,
+        isFetching
+    }
+}
+
 
 export default userReducer;
