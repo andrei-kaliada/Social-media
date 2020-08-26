@@ -1,3 +1,4 @@
+import {usersAPI, followAPI} from '../api/api';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -6,6 +7,7 @@ const SELECT_PAGE_NUMBER = 'SELECT_PAGE_NUMBER';
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 const CHANGE_FETCHING_STATUS = 'CHANGE_FETCHING_STATUS';
 const TOGGLE_DISABLED_FOLLOW_BUTTON = 'TOGGLE_DISABLED_FOLLOW_BUTTON';
+
 
 let initialState = {
     users: [],
@@ -146,6 +148,17 @@ export const toggleDisabledButton = (id,isFetching) => {
         id,
         isFetching
     }
+}
+
+
+export const getUsers = (currentPage,pageSize) => (dispatch) => {
+    dispatch(setFetchingStatus(false));
+    usersAPI.getUsers(currentPage,pageSize)
+    .then(data => {
+    dispatch(setUsers(data.items));
+    dispatch(getTotalCount(data.totalCount));
+    dispatch(setFetchingStatus(true));
+});
 }
 
 
