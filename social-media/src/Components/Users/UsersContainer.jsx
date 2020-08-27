@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {follow, unfollow, toggleFollow,
-    setPageNumber, toggleDisabledButton, getUsers} from '../../redux/users-reducer';
+import { toggleFollow,
+    setPageNumber, getUsers,followThunk, unFollowThunk} from '../../redux/users-reducer';
 import axios from 'axios';
 import Users from './Users';
 import {usersAPI, followAPI} from '../../api/api';
@@ -21,36 +21,18 @@ class UsersContainer extends React.Component {
     requestUsers = (element) =>{
        
         this.props.setPageNumber(element);
-        this.props.getUsersThunkCreator(element,this.props.pageSize);
+        this.props.getUsers(element,this.props.pageSize);
   
     }
 
     followUser = (id) => {
         
-        this.props.toggleDisabledButton(id,true);
-        followAPI.follow(id)
-        .then(data => {
-            if(data.resultCode === 0){
-                this.props.follow(id);
-               
-            }
-            this.props.toggleDisabledButton(id,false);
-            console.log(data);
-            
-        });
+        this.props.followThunk(id);
         
     }
 
     unFollowUser = (id) => {
-        this.props.toggleDisabledButton(id,true);
-        followAPI.unFollow(id)
-        .then(data =>{
-            if(data.resultCode === 0){
-                this.props.unfollow(id);
-                
-            }
-            this.props.toggleDisabledButton(id,false);
-        });
+       this.props.unFollowThunk(id);
         
     }
 
@@ -112,11 +94,9 @@ let mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, 
     {
-        follow,
-        unfollow,
-        toggleFollow,
         setPageNumber,
-        toggleDisabledButton,
-        getUsers
+        getUsers,
+        followThunk,
+        unFollowThunk
     }
     )(UsersContainer);

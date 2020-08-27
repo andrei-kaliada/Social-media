@@ -12,7 +12,6 @@ let Users = ({props, requestUsers, followUser,unFollowUser}) =>{
         totalUsersCount, currentPage,setPageNumber,isFetching,
         isDisabledBtn,
     } = props;
-    console.log(isDisabledBtn);
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
 

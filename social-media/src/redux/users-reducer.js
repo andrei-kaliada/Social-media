@@ -1,4 +1,4 @@
-import {usersAPI, followAPI} from '../api/api';
+import {usersAPI} from '../api/api';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -159,6 +159,32 @@ export const getUsers = (currentPage,pageSize) => (dispatch) => {
     dispatch(getTotalCount(data.totalCount));
     dispatch(setFetchingStatus(true));
 });
+}
+
+export const followThunk = (id) => (dispatch) => {
+    dispatch(toggleDisabledButton(id,true));
+    usersAPI.follow(id)
+    .then(data => {
+        if(data.resultCode === 0){
+            dispatch(follow(id));
+           
+        }
+        dispatch(toggleDisabledButton(id,false));
+        
+    });
+}
+
+export const unFollowThunk = (id) => (dispatch) => {
+    dispatch(toggleDisabledButton(id,true));
+    usersAPI.unFollow(id)
+    .then(data => {
+        if(data.resultCode === 0){
+            dispatch(unfollow(id));
+           
+        }
+        dispatch(toggleDisabledButton(id,false));
+        
+    });
 }
 
 

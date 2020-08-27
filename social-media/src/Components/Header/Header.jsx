@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
  const Header = (props) => {
     const classes = useStyles();
-    console.log(props);
+
     return(
         <header className="header">
                 <div className="headerWrapper">
