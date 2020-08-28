@@ -1,4 +1,4 @@
-import {usersAPI} from '../api/api';
+import {autAPI} from '../api/api';
 const GET_AUTH = 'GET_AUTH';
 
 
@@ -39,7 +39,7 @@ export const getAuth = ({id,login,email}) => {
 }
 
 export const authThunk = () => (dispatch) => {
-    usersAPI.auth()
+    autAPI.auth()
     .then( data => {
         if(data.resultCode === 0){
             dispatch(getAuth(data.data));

@@ -4,9 +4,10 @@ import Message from './Message/index';
 import DialogItem from './DialogItem/index';
 
 
-export default function Dialogs({ dialogsPage, addMessage, changeMessage }) {
 
-    
+export default function Dialogs({ dialogsPage, addMessage, changeMessage, isAuth }) {
+
+ 
 
     let addNewMessage = () => {
         addMessage();

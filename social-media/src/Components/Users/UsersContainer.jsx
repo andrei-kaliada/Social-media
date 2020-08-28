@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { toggleFollow,
-    setPageNumber, getUsers,followThunk, unFollowThunk} from '../../redux/users-reducer';
+import { toggleFollow,setPageNumber,
+     getUsers,followThunk, unFollowThunk} from '../../redux/users-reducer';
 import axios from 'axios';
 import Users from './Users';
 import {usersAPI, followAPI} from '../../api/api';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
+import withAuthRedirect from '../../hoc/withAuthRedirect';
 
 
 class UsersContainer extends React.Component {
@@ -92,11 +94,8 @@ let mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, 
-    {
-        setPageNumber,
-        getUsers,
-        followThunk,
-        unFollowThunk
-    }
-    )(UsersContainer);
+export default compose(
+    connect(mapStateToProps, {setPageNumber,getUsers,followThunk,unFollowThunk}),
+    withAuthRedirect
+    )
+    (UsersContainer);
