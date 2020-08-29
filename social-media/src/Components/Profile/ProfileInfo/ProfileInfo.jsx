@@ -1,6 +1,7 @@
 import React from 'react';
 import './ProfileInfo.scss';
 import unnamedUserPhoto from '../../../assets/images/unnamed.png';
+import ProfileStatus from './ProfileStatus';
 
 
 const ProfileInfo = (props) => {
@@ -12,16 +13,16 @@ const ProfileInfo = (props) => {
     
     return (
         <>
-            <div>
+            {/* <div>
                 <img src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg" alt="" />
-            </div>
+            </div> */}
             <div className="descriptionBlock">
             { props.profile.photos.small ?
             <img src={props.profile.photos.small} alt="user"/> :
             <img src={unnamedUserPhoto} alt="user"/>  
         }
                 <p>{props.profile.aboutMe}</p>
-                ava + description
+                <ProfileStatus />
             </div>
         </>
     );

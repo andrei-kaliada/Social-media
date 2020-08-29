@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import { Redirect } from 'react-router';
 
 let mapStateToPropsForRedirect = (state) => {
+  
     return{
-        auth:state.auth.isAuth
+        isAuth:state.auth.isAuth
     }
 }
 
@@ -17,7 +18,7 @@ export default function withAuthRedirect(Component) {
         }
 
         render() {
-            debugger
+    
             if(!this.props.isAuth){
                 return <Redirect to="/login"/>
             }

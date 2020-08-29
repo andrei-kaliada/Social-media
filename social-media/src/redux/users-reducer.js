@@ -81,7 +81,7 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 isDisabledBtn: action.isFetching 
                 ? [...state.isDisabledBtn, action.id]
-                 :state.isDisabledBtn.filter( el => el != action.id)
+                 :state.isDisabledBtn.filter( el => el !== action.id)
                 
                 ,
                 

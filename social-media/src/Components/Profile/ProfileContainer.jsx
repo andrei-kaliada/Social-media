@@ -1,5 +1,5 @@
 import React from 'react';
-import Profile from './ProfileInfo/Profile';
+import Profile from './Profile';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {setUserProfile, profileThunk} from '../../redux/profile-reducer';
@@ -44,5 +44,5 @@ let mapStateToProps = (state) => {
 export default compose (
     connect(mapStateToProps,{setUserProfile,profileThunk}),
     withRouter,
-    withAuthRedirect,
+    //withAuthRedirect,
 )(ProfileContainer);

@@ -65,37 +65,11 @@ let mapStateToProps = (state) => {
     }
 }
 
-// let mapDispatchToProps = (dispatch) => {
-//     return{
-//         setUsers:(users) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         follow:(userId) => {
-//             dispatch(followAC(userId))
-//         },
-//         unfollow:(userId) => {
-//             dispatch(unfollowAC(userId))
-//         },
-//         toggleFollow:(userId) => {
-//             dispatch(toggleFollowAC(userId))
-//         },
-//         setPageNumber:(currentPage) => {
-//             dispatch(selectPageNumber(currentPage));
-//         },
-//         getTotalCount:(totalCount) => {
-//             dispatch(setTotalCount(totalCount));
-//         },
-//         setFetchingStatus:(status)=>{
-//             dispatch(changeFetchingStatus(status));
-//         }
-
-//     }
-// }
 
 
 
 export default compose(
     connect(mapStateToProps, {setPageNumber,getUsers,followThunk,unFollowThunk}),
-    withAuthRedirect
+    withAuthRedirect,
     )
     (UsersContainer);

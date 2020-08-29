@@ -25,7 +25,7 @@ function App() {
            render={() => <ProfileContainer />} />
           <Route path="/dialogs" render={ () => <DialogsContainer />} />
           <Route path="/users" render={ () => <UsersContainer />} />
-          <Route path="/login" render={ () => <Login />} />
+          <Route exact path="/login" render={ () => <Login />} />
         </div>
       </div>
     </Router>
