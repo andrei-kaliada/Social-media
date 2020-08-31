@@ -7,7 +7,7 @@ export default function Profile(props) {
  
     return (
         <div className="MainContent">
-                <ProfileInfo  profile={props.profile}/>
+                <ProfileInfo {...props}  profile={props.profile}/>
                 <MyPostsContainer />
             </div>
     )

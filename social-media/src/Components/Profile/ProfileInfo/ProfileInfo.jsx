@@ -22,7 +22,11 @@ const ProfileInfo = (props) => {
             <img src={unnamedUserPhoto} alt="user"/>  
         }
                 <p>{props.profile.aboutMe}</p>
-                <ProfileStatus />
+                <ProfileStatus 
+                isFetching={props.isFetching}
+                status={props.status}
+                updateUserStatus={props.updateUserStatus}
+                />
             </div>
         </>
     );

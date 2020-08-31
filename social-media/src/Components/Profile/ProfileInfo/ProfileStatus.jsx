@@ -5,44 +5,53 @@ class ProfileStatus extends Component {
         super(props);
         this.state = {
             editMode: false,
-            textStatus:'Something status',
+            textStatus: this.props.status,
         }
     }
 
     activateEditMode = () => {
-        this.setState((state,props)=>({
-            editMode:true,
+
+        this.setState((state, props) => ({
+            editMode: true,
         }));
     }
 
     deactivateEditMode = () => {
-        this.setState((state,props)=>({
-            editMode:false,
+        this.setState((state, props) => ({
+            editMode: false,
         }));
+
+        this.props.updateUserStatus(this.state.textStatus);
     }
 
     onChangeTextStatus = (event) => {
         this.setState({
-            textStatus:event.target.value,
+            textStatus: event.target.value,
         });
     }
 
     render() {
+   
         return (
             <div>
                 {!this.state.editMode
                     ?
                     <div>
-                        <span onClick={this.activateEditMode}>Status:{this.state.textStatus}</span>
+                        <label for="statusText">Status:</label>
+                        <span id="statusText" onClick={this.activateEditMode}>{this.props.isFetching ?
+
+                            <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+                            : this.state.textStatus}</span>
                     </div>
                     :
                     <div>
                         <input
-                        onChange={(event)=> this.onChangeTextStatus(event)} 
-                        onBlur={this.deactivateEditMode} 
-                        placeholder='Write your status'
-                        autoFocus={true}
-                         />
+                            onChange={(event) => this.onChangeTextStatus(event)}
+                            onBlur={this.deactivateEditMode}
+                            placeholder='Write your status'
+                            autoFocus={true}
+                        />
                     </div>
                 }
             </div>

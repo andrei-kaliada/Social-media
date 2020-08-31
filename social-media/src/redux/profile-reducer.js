@@ -1,7 +1,9 @@
-import {usersAPI} from '../api/api';
+import { usersAPI, profileAPI } from '../api/api';
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const NEW_USER_PROFILE = 'NEW_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
+const CHANGE_FETCHING = 'CHANGE_FETCHING';
 
 let initialState = {
     posts: [
@@ -10,7 +12,9 @@ let initialState = {
         { id: 3, message: 'I am fine', likeCount: 10 },
     ],
     newPostsText: 'Something',
-    userProfileData:null,
+    userProfileData: null,
+    status: "",
+    isFetching:false
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -31,9 +35,19 @@ const profileReducer = (state = initialState, action) => {
                 newPostsText: action.newText
             }
         case NEW_USER_PROFILE:
+            return {
+                ...state,
+                userProfileData: action.userData
+            }
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
+        case CHANGE_FETCHING:
             return{
                 ...state,
-                userProfileData:action.userData
+                isFetching:action.isFetching
             }
         default: return state;
     }
@@ -54,19 +68,55 @@ export const updateNewPostTextActionCreator = (text) => {
 }
 
 export const setUserProfile = (userData) => {
-    return{
-        type:NEW_USER_PROFILE,
+    return {
+        type: NEW_USER_PROFILE,
         userData
     }
 }
 
+
+export const setStatus = (status) => {
+    return {
+        type: SET_STATUS,
+        status
+    }
+}
+
+export const changeFetching = (isFetching) => {
+    return{
+        type:CHANGE_FETCHING,
+        isFetching
+    }
+}
+
 export const profileThunk = (userId) => (dispatch) => {
-    
+
     usersAPI.profile(userId)
-    .then(data => {
-        dispatch(setUserProfile(data));
-    });
-    
+        .then(data => {
+            dispatch(setUserProfile(data));
+        });
+}
+
+export const getUserStatus = (userId) => (dispatch) => {
+    profileAPI.getStatus(userId)
+        .then(data => {
+            dispatch(setStatus(data))
+        });
+}
+
+
+
+export const updateUserStatus = (status) => (dispatch) => {
+    dispatch(changeFetching(true));
+    profileAPI.updateStatus(status)
+        .then(response => {
+           
+           if(response.data.resultCode === 0){
+            dispatch(setStatus(status));
+            dispatch(changeFetching(false));
+           }
+        });
+
 }
 
 export default profileReducer;
