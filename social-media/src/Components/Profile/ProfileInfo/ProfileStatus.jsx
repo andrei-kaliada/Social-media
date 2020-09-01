@@ -30,15 +30,25 @@ class ProfileStatus extends Component {
         });
     }
 
+    componentDidUpdate(prevProps, prevState){
+
+        if(prevProps.status !== this.props.status){
+            this.setState({
+                textStatus:this.props.status
+            })
+        }
+    
+    }
+
     render() {
-   
+        
         return (
             <div>
                 {!this.state.editMode
                     ?
                     <div>
-                        <label for="statusText">Status:</label>
-                        <span id="statusText" onClick={this.activateEditMode}>{this.props.isFetching ?
+                        
+                        <span id="statusText" onClick={this.activateEditMode}>Status:{this.props.isFetching ?
 
                             <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
 
@@ -49,7 +59,7 @@ class ProfileStatus extends Component {
                         <input
                             onChange={(event) => this.onChangeTextStatus(event)}
                             onBlur={this.deactivateEditMode}
-                            placeholder='Write your status'
+                            value={this.state.textStatus}
                             autoFocus={true}
                         />
                     </div>

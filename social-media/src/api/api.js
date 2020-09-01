@@ -26,7 +26,7 @@ export const usersAPI = {
       
 
       profile(userId){
-        console.warn('Obolete metod. Please use profileAPI object.');
+    
         return profileAPI.getProfile(userId);
 
     }
