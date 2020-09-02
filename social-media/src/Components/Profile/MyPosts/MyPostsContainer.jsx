@@ -3,6 +3,7 @@ import './MyPosts.scss';
 import MyPosts from './MyPosts';
 import {connect} from 'react-redux';
 import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profile-reducer';
+import { reset } from 'redux-form';
 
 
 
@@ -16,12 +17,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
     return {
-        addPost:() => {
-            dispatch(addPostActionCreator());
+        addPost:(text) => {
+            dispatch(addPostActionCreator(text));
+            dispatch(reset('myPost'));
         },
-        updateNewPostText:(text) => {
-            dispatch(updateNewPostTextActionCreator(text))
-        }
+        
     }
 }
 

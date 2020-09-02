@@ -26,11 +26,17 @@ const useStyles = makeStyles((theme) => ({
                       </Link>
                     </div>
                     { props.isAuth ? 
+                      <div>
                         <p>{props.login}</p>
+                          <Button onClick={props.logOut} variant="contained" color="primary">
+                              LogOut
+                          </Button>
+                      </div>
+                        
                     :
                         <NavLink to='/login'>
                         <Button variant="contained" color="primary">
-                            Login
+                            LogIn
                         </Button>
                         </NavLink>
                     }

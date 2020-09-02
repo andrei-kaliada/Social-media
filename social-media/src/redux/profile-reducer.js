@@ -25,7 +25,7 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 posts: [...state.posts, {
                     id: state.posts.length + 1,
-                    message: state.newPostsText,
+                    message: action.text,
                 }],
                 newPostsText: '',
             }
@@ -54,9 +54,10 @@ const profileReducer = (state = initialState, action) => {
 }
 
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (text) => {
     return {
         type: ADD_POST,
+        text
     }
 }
 

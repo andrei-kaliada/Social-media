@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getAuth,authThunk} from '../../redux/auth-reduser';
+import {logOut} from '../../redux/login-reducer';
 import Header from './Header';
 import axios from 'axios';
 import {compose} from 'redux';
@@ -37,6 +38,6 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps,{getAuth, authThunk}),
+    connect(mapStateToProps,{getAuth, authThunk, logOut}),
 )
 (HeaderContainer);

@@ -39,9 +39,11 @@ export const getAuth = ({id,login,email}) => {
 }
 
 export const authThunk = () => (dispatch) => {
+  
     autAPI.auth()
     .then( data => {
         if(data.resultCode === 0){
+           
             dispatch(getAuth(data.data));
         }
     });

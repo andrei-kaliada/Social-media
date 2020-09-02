@@ -2,20 +2,43 @@ import React from 'react'
 import "./Dialogs.scss";
 import Message from './Message/index';
 import DialogItem from './DialogItem/index';
+import { Field, reduxForm, reset } from 'redux-form';
 
+function DialogsForm(props){
 
+    const { handleSubmit } = props;
+
+    return (
+        <form onSubmit={handleSubmit} enableReinitialize={true}>
+           <div>
+            <Field component="textarea" name="messageInput"></Field>
+           </div>
+            <button>Send</button>
+        </form>
+    );
+}
+
+const DialogsFormContainer = reduxForm({
+    form:'message'
+})(DialogsForm);
+
+// dispatch(reset('message'));
 
 export default function Dialogs({ dialogsPage, addMessage, changeMessage, isAuth }) {
 
- 
+    console.log(dialogsPage.dialogs)
+    // let addNewMessage = () => {
+    //     addMessage();
+    // }
 
-    let addNewMessage = () => {
-        addMessage();
-    }
+    // let onChangeMessage = (event) => {
 
-    let onChangeMessage = (event) => {
-        
-        changeMessage(event.target.value);
+    //     changeMessage(event.target.value);
+    // }
+
+    let submit = (value) => {
+        console.log(value.messageInput);
+        addMessage(value.messageInput);
     }
 
     return (
@@ -32,8 +55,7 @@ export default function Dialogs({ dialogsPage, addMessage, changeMessage, isAuth
                     ))}
                 </div>
                 <div className="inputMessage">
-                    <textarea onChange={onChangeMessage} value={dialogsPage.newMessageText}></textarea>
-                    <button onClick={addNewMessage}>Send</button>
+                        <DialogsFormContainer onSubmit={submit}/>
                 </div>
             </div>
         </>
