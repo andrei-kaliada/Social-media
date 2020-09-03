@@ -20,12 +20,6 @@ export const logIn = (dataLogin) => (dispatch) =>{
     })
 }
 
-// export const RedirectAfterLogOut = () => {
-
-//     return(
-//         <Redirect to="/profile" />
-//     );
-// }
 
 export const logOut = () => (dispatch) =>{
 
