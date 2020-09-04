@@ -4,6 +4,7 @@ import './MyPosts.scss';
 import { Field, reduxForm } from 'redux-form';
 import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profile-reducer';
 import {required, maxLength} from '../../../utils/validators/validators';
+import {TextArea} from '../../common/FormsControls/FormsControls';
 
 
 const maxLengthCreator = maxLength(10);
@@ -15,7 +16,7 @@ function myPostForm(props){
         <form onSubmit={handleSubmit}>
             <div>
                 <Field 
-                component="textarea" 
+                component={TextArea}
                 name="myPostMessage" 
                 placeholder={"Write some message"}
                 validate={[required, maxLengthCreator]}
