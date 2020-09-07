@@ -13,3 +13,10 @@ export const maxLength = (maxLength) => (value) =>  {
         return undefined;
     }
 }
+
+export const emailSumbol = (value) => {
+    console.log(value);
+    if(value.indexOf('@') === -1){
+        return `You mast input @ in your email adress.`;
+    }
+}

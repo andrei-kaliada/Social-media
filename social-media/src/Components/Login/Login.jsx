@@ -6,10 +6,13 @@ import { reset } from 'redux-form';
 
 
 
+
 class Login extends React.Component{
     submit = (value) => {
         console.log(value);
         this.props.logIn(value);
+        this.props.reset('login');
+        
     }
 
 
@@ -18,12 +21,11 @@ class Login extends React.Component{
         return (
             <div>
                 <h1>Login</h1>
-            <LoginForm onSubmit={this.submit}/>
+                <LoginForm onSubmit={this.submit}/>
             </div>
         )
     }
 }
-
 
 
 let mapStateToProps = (state) => {
@@ -32,4 +34,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,{logIn})(Login);
+export default connect(mapStateToProps,{logIn,reset})(Login);

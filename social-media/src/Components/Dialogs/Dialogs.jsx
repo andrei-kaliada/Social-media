@@ -3,6 +3,10 @@ import "./Dialogs.scss";
 import Message from './Message/index';
 import DialogItem from './DialogItem/index';
 import { Field, reduxForm, reset } from 'redux-form';
+import {TextArea} from '../common/FormsControls/FormsControls';
+import {required, maxLength} from '../../utils/validators/validators';
+
+const maxLengthCreator = maxLength(10);
 
 function DialogsForm(props){
 
@@ -11,7 +15,12 @@ function DialogsForm(props){
     return (
         <form onSubmit={handleSubmit} enableReinitialize={true}>
            <div>
-            <Field component="textarea" name="messageInput"></Field>
+            <Field 
+            component={TextArea}
+             placeholder="Input some message"
+              name="messageInput"
+              validate={[required, maxLengthCreator]}
+              ></Field>
            </div>
             <button>Send</button>
         </form>
@@ -26,15 +35,6 @@ const DialogsFormContainer = reduxForm({
 
 export default function Dialogs({ dialogsPage, addMessage, changeMessage, isAuth }) {
 
-    console.log(dialogsPage.dialogs)
-    // let addNewMessage = () => {
-    //     addMessage();
-    // }
-
-    // let onChangeMessage = (event) => {
-
-    //     changeMessage(event.target.value);
-    // }
 
     let submit = (value) => {
         console.log(value.messageInput);

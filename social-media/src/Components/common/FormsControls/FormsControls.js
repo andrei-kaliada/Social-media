@@ -1,13 +1,37 @@
 import React from 'react';
 import './FormsControls.scss';
 
-export const TextArea = ({input, ...props}) => {
+const FormControl = ({ input, meta: { touched, error, warning }, ...props }) => {
+    let style = error && touched ? "error" : null;
 
-let style = input.onDragStart ? "notError" : "error";
-
-    return(
+    return (
         <div className={style}>
-            <textarea {...input} {...props}/>
+            <div>
+                {props.children}
+            </div>
+            {error && touched &&
+                <div>
+                    <span>{error}</span>
+                </div>
+            }
         </div>
+    );
+}
+
+export const TextArea = (props) => {
+
+    return (
+        <FormControl {...props}>
+            <textarea {...props.input} {...props} />
+        </FormControl>
+    );
+}
+
+export const Input = (props) => {
+
+    return (
+        <FormControl {...props}>
+            <input {...props.input} {...props} />
+        </FormControl>
     );
 }
