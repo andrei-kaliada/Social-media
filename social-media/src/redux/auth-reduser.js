@@ -1,5 +1,6 @@
 import {autAPI} from '../api/api';
 const GET_AUTH = 'GET_AUTH';
+const LOG_OUT_AUTH = 'LOG_OUT_AUTH';
 
 
 let initialState = {
@@ -18,33 +19,49 @@ const authReducer = (state = initialState, action) => {
           
             return{
                 ...state,   
-                ...action.data,
-                isAuth:true
+                ...action.payload,
             }
         default: return state;
     }
 }
 
 
-export const getAuth = ({id,login,email}) => {
-    
+export const getAuth = (id,login,email,isAuth) => {
+   console.log(id,login,email,isAuth);
     return {
         type:GET_AUTH,
-        data:{
+        payload:{
             id,
             email,
             login,
+            isAuth
         }
     }
 }
+
+
 
 export const authThunk = () => (dispatch) => {
   
     autAPI.auth()
     .then( data => {
+        console.log(data.data);
         if(data.resultCode === 0){
+            
+           let {id ,email, login } = data.data;
+            dispatch(getAuth(id, login,email, true));
+        }
+    });
+}
+
+export const logOutAuthThunk = () => (dispatch) => {
+  
+    autAPI.auth()
+    .then( data => {
+        console.log(data)
+        if(data.resultCode === 1){
            
-            dispatch(getAuth(data.data));
+            dispatch(getAuth(null,null,null,false));
         }
     });
 }

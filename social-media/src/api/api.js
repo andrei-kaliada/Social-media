@@ -60,7 +60,7 @@ export const autAPI = {
 }
 
 export const loginAPI = {
-  logIn({login,password,rememberMe}){
+  logIn({login,password,rememberMe = false}){
     return instance.post(`/auth/login`,{
       email:login,
       password,

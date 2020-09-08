@@ -25,10 +25,12 @@ const useStyles = makeStyles((theme) => ({
                          <h1>Logo</h1>
                       </Link>
                     </div>
+
+                    
                     { props.isAuth ? 
                       <div>
                         <p>{props.login}</p>
-                          <Button onClick={props.logOut} variant="contained" color="primary">
+                        <Button onClick={props.logOut} variant="contained" color="primary">
                               LogOut
                           </Button>
                       </div>
