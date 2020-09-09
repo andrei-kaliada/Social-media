@@ -60,9 +60,9 @@ export const autAPI = {
 }
 
 export const loginAPI = {
-  logIn({login,password,rememberMe = false}){
+  logIn({email,password,rememberMe = false}){
     return instance.post(`/auth/login`,{
-      email:login,
+      email,
       password,
       rememberMe
     }).then(response => response.data);

@@ -27,7 +27,6 @@ const authReducer = (state = initialState, action) => {
 
 
 export const getAuth = (id,login,email,isAuth) => {
-   console.log(id,login,email,isAuth);
     return {
         type:GET_AUTH,
         payload:{
@@ -45,7 +44,6 @@ export const authThunk = () => (dispatch) => {
   
     autAPI.auth()
     .then( data => {
-        console.log(data.data);
         if(data.resultCode === 0){
             
            let {id ,email, login } = data.data;
@@ -58,7 +56,6 @@ export const logOutAuthThunk = () => (dispatch) => {
   
     autAPI.auth()
     .then( data => {
-        console.log(data)
         if(data.resultCode === 1){
            
             dispatch(getAuth(null,null,null,false));

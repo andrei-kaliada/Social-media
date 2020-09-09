@@ -9,7 +9,7 @@ import { Redirect } from 'react-router';
 
 class Login extends React.Component{
     submit = (value) => {
-        console.log(value);
+
         this.props.logIn(value);
         this.props.reset('login');
         
@@ -17,7 +17,7 @@ class Login extends React.Component{
 
 
     render(){
-        console.log(this.props.isAuth)
+
         if(this.props.isAuth){
             return <Redirect to={'/profile'} />
         }
