@@ -10,10 +10,7 @@ import withAuthRedirect from '../../hoc/withAuthRedirect';
 
 
 class UsersContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        // this.requestUsers = this.requestUsers.bind(this);
-    }
+    
 
     componentDidMount() {
       

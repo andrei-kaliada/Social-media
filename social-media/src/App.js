@@ -10,28 +10,40 @@ import HeaderContainer from './Components/Header/HeaderContainer';
 import Login from './Components/Login/Login';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import history from './history/history';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import { withRouter } from "react-router";
+import {initializApp} from './redux/app-reducer';
 
 
 
-function App() {
+class App extends React.Component{
 
-  return (
-    <Router history={history}>
-      <div className="wrapperApp">
-        <HeaderContainer />
-        <Nav />
-        <div className="wrapperApp__content">
-          <Route exact path="/" />
-          <Route  path="/profile/:userId?"
-           render={() => <ProfileContainer />} />
-          <Route path="/dialogs" render={ () => <DialogsContainer />} />
-          <Route path="/users" render={ () => <UsersContainer />} />
-          <Route exact path="/login" render={ () => <Login />} />
-        </div>
-      </div>
-    </Router>
 
-  );
+  componentDidMount(){
+    this.props.initializApp();
 }
 
-export default App;
+  render(){
+    return (
+        <div className="wrapperApp">
+          <HeaderContainer />
+          <Nav />
+          <div className="wrapperApp__content">
+            <Route exact path="/" />
+            <Route  path="/profile/:userId?"
+             render={() => <ProfileContainer />} />
+            <Route exact  path="/dialogs" render={ () => <DialogsContainer />} />
+            <Route exact  path="/users" render={ () => <UsersContainer />} />
+            <Route exact path="/login" render={ () => <Login />} />
+          </div>
+        </div>
+    );
+  }
+  
+}
+
+export default compose(
+  connect(null,{initializApp}),
+  withRouter,
+  )(App);

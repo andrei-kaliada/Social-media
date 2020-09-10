@@ -13,10 +13,7 @@ export default function withAuthRedirect(Component) {
 
 
     class RedirectComponent extends React.Component {
-        constructor(props){
-            super(props);
-        }
-
+       
         render() {
     
             if(!this.props.isAuth){
