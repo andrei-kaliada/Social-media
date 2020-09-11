@@ -153,6 +153,7 @@ export const toggleDisabledButton = (id,isFetching) => {
 
 export const getUsers = (currentPage,pageSize) => (dispatch) => {
     dispatch(setFetchingStatus(false));
+    dispatch(setPageNumber(currentPage));
     usersAPI.getUsers(currentPage,pageSize)
     .then(data => {
     dispatch(setUsers(data.items));

@@ -7,6 +7,9 @@ import {usersAPI, followAPI} from '../../api/api';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import withAuthRedirect from '../../hoc/withAuthRedirect';
+import {getUsersSelect, getPageSize,
+     getTotalUsersCount, getCurrentPage,
+      getIsFetching ,getIsDisabledBtn} from '../../redux/users-selectors';
 
 
 class UsersContainer extends React.Component {
@@ -19,7 +22,7 @@ class UsersContainer extends React.Component {
 
     requestUsers = (element) =>{
        
-        this.props.setPageNumber(element);
+      
         this.props.getUsers(element,this.props.pageSize);
   
     }
@@ -51,14 +54,25 @@ class UsersContainer extends React.Component {
     };
 }
 
+// let mapStateToProps = (state) => {
+//     return{
+//         users:state.usersPage.users,
+//         pageSize:state.usersPage.pageSize,
+//         totalUsersCount:state.usersPage.totalUsersCount,
+//         currentPage:state.usersPage.currentPage,
+//         isFetching:state.usersPage.isFetching,
+//         isDisabledBtn:state.usersPage.isDisabledBtn,
+//     }
+// }
+
 let mapStateToProps = (state) => {
     return{
-        users:state.usersPage.users,
-        pageSize:state.usersPage.pageSize,
-        totalUsersCount:state.usersPage.totalUsersCount,
-        currentPage:state.usersPage.currentPage,
-        isFetching:state.usersPage.isFetching,
-        isDisabledBtn:state.usersPage.isDisabledBtn,
+        users:getUsersSelect(state),
+        pageSize:getPageSize(state),
+        totalUsersCount:getTotalUsersCount(state),
+        currentPage:getCurrentPage(state),
+        isFetching:getIsFetching(state),
+        isDisabledBtn:getIsDisabledBtn(state),
     }
 }
 
@@ -66,7 +80,7 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, {setPageNumber,getUsers,followThunk,unFollowThunk}),
-    withAuthRedirect,
+    connect(mapStateToProps, {getUsers,followThunk,unFollowThunk}),
+    // withAuthRedirect,
     )
     (UsersContainer);

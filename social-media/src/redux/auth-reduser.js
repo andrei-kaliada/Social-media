@@ -42,7 +42,7 @@ export const getAuth = (id,login,email,isAuth) => {
 
 export const authThunk = () => (dispatch) => {
   
-    autAPI.auth()
+   return autAPI.auth()
     .then( data => {
         if(data.resultCode === 0){
             

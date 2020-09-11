@@ -1,31 +1,31 @@
-import {authThunk} from './auth-reduser';
+import { authThunk } from './auth-reduser';
 const GET_AUTH = 'GET_AUTH';
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
 
 let initialState = {
-    initialized:false,
+    initialized: false,
 }
 
 
 const appReducer = (state = initialState, action) => {
-   
-    switch(action.type){
+
+    switch (action.type) {
         case INITIALIZED_SUCCESS:
-          
-            return{
-                ...state,   
-                initialized:true
+
+            return {
+                ...state,
+                initialized: true
             }
         default: return state;
     }
 }
 
 
-export const getAuth = (id,login,email,isAuth) => {
+export const getAuth = (id, login, email, isAuth) => {
     return {
-        type:GET_AUTH,
-        payload:{
+        type: GET_AUTH,
+        payload: {
             id,
             email,
             login,
@@ -36,15 +36,20 @@ export const getAuth = (id,login,email,isAuth) => {
 
 
 export let initializedSuccess = () => {
-    return{
-        type:INITIALIZED_SUCCESS
+    return {
+        type: INITIALIZED_SUCCESS
     }
 }
 
 export let initializApp = () => (dispatch) => {
-    
-    dispatch(authThunk());
-    dispatch(initializedSuccess());
+
+    let promise = dispatch(authThunk());
+
+    Promise.all([promise])
+    .then(() => {
+        dispatch(initializedSuccess());
+    }
+    )
 }
 
 

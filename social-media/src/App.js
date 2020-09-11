@@ -25,6 +25,9 @@ class App extends React.Component{
 }
 
   render(){
+    if(!this.props.initialization){
+      return <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    }
     return (
         <div className="wrapperApp">
           <HeaderContainer />
@@ -43,7 +46,13 @@ class App extends React.Component{
   
 }
 
+let mapStateToProps = (state) => {
+  return {
+    initialization:state.appInit.initialized,
+  }
+}
+
 export default compose(
-  connect(null,{initializApp}),
+  connect(mapStateToProps,{initializApp}),
   withRouter,
   )(App);
