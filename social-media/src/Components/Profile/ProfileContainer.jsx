@@ -17,9 +17,9 @@ class ProfileContainer extends React.Component {
         console.log(userId)
         if(!userId){
             userId = this.props.authId;
-            if(!userId){
-                this.props.history.push('/login')
-            }
+            // if(!userId){
+            //     this.props.history.push('/login')
+            // }
         }
         
         this.props.profileThunk(userId);
@@ -30,9 +30,9 @@ class ProfileContainer extends React.Component {
 
     render() {
 
-        // if(!this.props.isAuth){
-        //     return <Redirect to="/login"/>
-        // }
+        if(!this.props.isAuth){
+            return <Redirect to="/login"/>
+        }
         
         return (
             <Profile {...this.props} profile={this.props.userProfileData}/>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 
 class ProfileStatus extends Component {
     constructor(props) {
