@@ -3,7 +3,12 @@ import React, { Component, useState, useEffect } from 'react';
 function ProfileStatus(props){
     const [editMode, changeEditMode] = useState(false);
     const [textStatus, changeTextStatus] = useState(props.status);
+    
 
+    useEffect(()=>{
+        
+        changeTextStatus(props.status);
+    },[props.status]);
    
 
     const activateEditMode = () => {
