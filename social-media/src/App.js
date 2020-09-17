@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.scss';
 import 'normalize.css';
-import Header from './Components/Header/Header';
 import Nav from './Components/Navigation/Nav';
 import ProfileContainer from './Components/Profile/ProfileContainer';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
@@ -9,7 +8,6 @@ import UsersContainer from './Components/Users/UsersContainer';
 import HeaderContainer from './Components/Header/HeaderContainer';
 import Login from './Components/Login/Login';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import history from './history/history';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import { withRouter } from "react-router";
@@ -26,14 +24,14 @@ class App extends React.Component{
 
   render(){
     if(!this.props.initialization){
-      return <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      return <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     }
     return (
         <div className="wrapperApp">
           <HeaderContainer />
           <Nav />
           <div className="wrapperApp__content">
-            <Route exact path="/" />
+            <Route exact path="/" render={()=><div>Main page</div>}/>
             <Route  path="/profile/:userId?"
              render={() => <ProfileContainer />} />
             <Route exact  path="/dialogs" render={ () => <DialogsContainer />} />

@@ -1,4 +1,5 @@
 import {usersAPI} from '../api/api';
+import orderBy from 'lodash/orderBy';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -7,6 +8,7 @@ const SELECT_PAGE_NUMBER = 'SELECT_PAGE_NUMBER';
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 const CHANGE_FETCHING_STATUS = 'CHANGE_FETCHING_STATUS';
 const TOGGLE_DISABLED_FOLLOW_BUTTON = 'TOGGLE_DISABLED_FOLLOW_BUTTON';
+const SORT_USERS = 'SORT_USERS';
 
 
 let initialState = {
@@ -82,9 +84,12 @@ const userReducer = (state = initialState, action) => {
                 isDisabledBtn: action.isFetching 
                 ? [...state.isDisabledBtn, action.id]
                  :state.isDisabledBtn.filter( el => el !== action.id)
-                
-                ,
-                
+                ,  
+            }
+        case SORT_USERS:
+            return {
+                ...state,
+                users:[...orderBy(state.users,['name'],['asc'])]
             }
         default: return state;
     }
@@ -147,6 +152,12 @@ export const toggleDisabledButton = (id,isFetching) => {
         type:TOGGLE_DISABLED_FOLLOW_BUTTON,
         id,
         isFetching
+    }
+}
+
+export const sortUsers = () => {
+    return{
+        type:SORT_USERS
     }
 }
 

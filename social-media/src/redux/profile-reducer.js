@@ -1,9 +1,12 @@
 import { usersAPI, profileAPI } from '../api/api';
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const NEW_USER_PROFILE = 'NEW_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const CHANGE_FETCHING = 'CHANGE_FETCHING';
+const REVERCE_MESSAGES = 'REVERCE_MESSAGES';
+
 
 let initialState = {
     posts: [
@@ -49,7 +52,18 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 isFetching:action.isFetching
             }
+        case REVERCE_MESSAGES:
+            return{
+                ...state,
+                posts:[...state.posts.reverse()]
+            }
         default: return state;
+    }
+}
+
+export const reverseMessages = () => {
+    return {
+        type:REVERCE_MESSAGES
     }
 }
 

@@ -1,6 +1,6 @@
 import {autAPI} from '../api/api';
 const GET_AUTH = 'GET_AUTH';
-const LOG_OUT_AUTH = 'LOG_OUT_AUTH';
+// const LOG_OUT_AUTH = 'LOG_OUT_AUTH';
 
 
 let initialState = {

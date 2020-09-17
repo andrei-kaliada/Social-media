@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
 import './MyPosts.scss';
 import MyPosts from './MyPosts';
 import {connect} from 'react-redux';
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profile-reducer';
+import { addPostActionCreator,reverseMessages } from '../../../redux/profile-reducer';
 import { reset } from 'redux-form';
 
 
@@ -21,6 +20,9 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(addPostActionCreator(text));
             dispatch(reset('myPost'));
         },
+        reverceMsg:()=>{
+            dispatch(reverseMessages());
+        }
         
     }
 }

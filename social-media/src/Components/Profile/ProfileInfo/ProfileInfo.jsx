@@ -6,10 +6,9 @@ import ProfileStatus from './ProfileStatusWithHooks';
 
 const ProfileInfo = (props) => {
     if(!props.profile){
-       return <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+       return <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     }
     
- 
     
     return (
         <>

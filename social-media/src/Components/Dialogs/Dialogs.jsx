@@ -2,7 +2,7 @@ import React from 'react'
 import "./Dialogs.scss";
 import Message from './Message/index';
 import DialogItem from './DialogItem/index';
-import { Field, reduxForm, reset } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import {TextArea} from '../common/FormsControls/FormsControls';
 import {required, maxLength} from '../../utils/validators/validators';
 
@@ -37,7 +37,7 @@ export default function Dialogs({ dialogsPage, addMessage, changeMessage, isAuth
 
 
     let submit = (value) => {
-        console.log(value.messageInput);
+    
         addMessage(value.messageInput);
     }
 

@@ -1,8 +1,5 @@
-import React from 'react';
-import {loginAPI, autAPI} from '../api/api';
+import {loginAPI} from '../api/api';
 import {authThunk,logOutAuthThunk} from './auth-reduser';
-import { Redirect } from 'react-router';
-import history from '../history/history';
 import { stopSubmit } from 'redux-form';
 
 export const logIn = (dataLogin) => (dispatch) =>{

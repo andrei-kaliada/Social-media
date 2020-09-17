@@ -15,7 +15,7 @@ class ProfileContainer extends React.Component {
     
         let userId = this.props.match.params.userId;  
         
-        console.log(userId)
+       
         if(!userId){
             userId = this.props.authId;
             // if(!userId){

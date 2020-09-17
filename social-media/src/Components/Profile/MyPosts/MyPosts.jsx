@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Post from './Post/Post';
 import './MyPosts.scss';
 import { Field, reduxForm } from 'redux-form';
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/profile-reducer';
 import {required, maxLength} from '../../../utils/validators/validators';
 import {TextArea} from '../../common/FormsControls/FormsControls';
 
@@ -33,35 +32,30 @@ const MyPostFormContainer = reduxForm({
     form:'myPost'
 })(myPostForm);
 
-const MyPosts = ({ posts, addPost }) => {
+const MyPosts = (props) => {
+  
 
-    let submit = (value) => {
-        console.log(value.myPostMessage);
-        addPost(value.myPostMessage);
-    }
+  let submit = value => {
+    console.log(value.myPostMessage);
+    props.addPost(value.myPostMessage);
+  };
 
+  console.log("RENDER");
+  let posts  = props.posts.map(post => <Post key={post.id} message={post.message} likes={post.likeCount} />)
 
-
-    return (
-        <div className="bostsBlock">
+  return <div className="bostsBlock">
             <div className="bostsBlock__title">
                 <h3>My posts</h3>
             </div>
             <div>
-                <MyPostFormContainer onSubmit={submit}/>
+                <MyPostFormContainer onSubmit={submit} />
             </div>
             <div className="posts">
-                {posts && posts.map((post) => (
-                    <Post
-                        key={post.id}
-                        message={post.message}
-                        likes={post.likeCount}
-                    />
-                ))}
-
+            <button onClick={props.reverceMsg}>Reverce Messages</button>
+                {props.posts && posts}
+                
             </div>
-        </div>
-    );
-}
+        </div>;
+};
 
-export default MyPosts;
+export default React.memo(MyPosts);

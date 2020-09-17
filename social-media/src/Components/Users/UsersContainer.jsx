@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
-import { toggleFollow,setPageNumber,
-     getUsers,followThunk, unFollowThunk} from '../../redux/users-reducer';
-import axios from 'axios';
+import React from 'react';
+import { getUsers,followThunk, unFollowThunk, sortUsers} from '../../redux/users-reducer';
 import Users from './Users';
-import {usersAPI, followAPI} from '../../api/api';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import withAuthRedirect from '../../hoc/withAuthRedirect';
 import {getUsersSelect, getPageSize,
      getTotalUsersCount, getCurrentPage,
       getIsFetching ,getIsDisabledBtn} from '../../redux/users-selectors';
@@ -48,7 +44,7 @@ class UsersContainer extends React.Component {
              requestUsers={this.requestUsers}
              followUser={this.followUser}
              unFollowUser={this.unFollowUser}
-           
+             sortUsers={this.sortUsers}
             />
         );
     };
@@ -80,7 +76,7 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, {getUsers,followThunk,unFollowThunk}),
+    connect(mapStateToProps, {getUsers,followThunk,unFollowThunk, sortUsers}),
     // withAuthRedirect,
     )
     (UsersContainer);

@@ -7,10 +7,9 @@ import { NavLink } from 'react-router-dom';
 
 let Users = ({props, requestUsers, followUser,unFollowUser}) =>{
 
-    let { users, follow, unfollow,
-        setUsers, toggleFollow, pageSize,
-        totalUsersCount, currentPage,setPageNumber,isFetching,
-        isDisabledBtn,
+    let { users, pageSize,
+        totalUsersCount, currentPage,isFetching,
+        isDisabledBtn,sortUsers
     } = props;
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
@@ -20,7 +19,7 @@ let Users = ({props, requestUsers, followUser,unFollowUser}) =>{
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
-
+console.log(users);
  
     return(
         <div>
@@ -42,6 +41,7 @@ let Users = ({props, requestUsers, followUser,unFollowUser}) =>{
                { isFetching ? 
                
                <div>
+                   <button onClick={sortUsers}>Sort Users</button>
                     {
                     users && users.map((element) => (
 
@@ -90,7 +90,7 @@ let Users = ({props, requestUsers, followUser,unFollowUser}) =>{
                </div>
 
                : 
-               <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+               <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                }
             </div>
     );
