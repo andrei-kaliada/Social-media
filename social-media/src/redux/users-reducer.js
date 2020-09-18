@@ -18,6 +18,7 @@ let initialState = {
     currentPage:1,
     isFetching:false,
     isDisabledBtn:[],
+    sortBy:false
 };
 
 const userReducer = (state = initialState, action) => {
@@ -89,7 +90,8 @@ const userReducer = (state = initialState, action) => {
         case SORT_USERS:
             return {
                 ...state,
-                users:[...orderBy(state.users,['name'],['asc'])]
+                users:[...orderBy(state.users,['name'],[state.sortBy ? 'asc' : 'desc'])],
+                sortBy:!state.sortBy
             }
         default: return state;
     }

@@ -13,7 +13,7 @@ function DialogsForm(props){
     const { handleSubmit } = props;
 
     return (
-        <form onSubmit={handleSubmit} enableReinitialize={true}>
+        <form onSubmit={handleSubmit}>
            <div>
             <Field 
             component={TextArea}

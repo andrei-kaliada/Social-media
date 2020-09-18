@@ -6,6 +6,7 @@ const NEW_USER_PROFILE = 'NEW_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const CHANGE_FETCHING = 'CHANGE_FETCHING';
 const REVERCE_MESSAGES = 'REVERCE_MESSAGES';
+const DELETE_POST = 'DELETE_POST';
 
 
 let initialState = {
@@ -31,6 +32,11 @@ const profileReducer = (state = initialState, action) => {
                     message: action.text,
                 }],
                 newPostsText: '',
+            }
+        case DELETE_POST:
+            return{
+                ...state,
+                posts:[...state.posts.filter( el => el.id !== action.id)]
             }
         case UPDATE_NEW_POST_TEXT:
             return {
@@ -58,6 +64,13 @@ const profileReducer = (state = initialState, action) => {
                 posts:[...state.posts.reverse()]
             }
         default: return state;
+    }
+}
+
+export const deletePost = (id) => {
+    return{
+        type:DELETE_POST,
+        id
     }
 }
 
