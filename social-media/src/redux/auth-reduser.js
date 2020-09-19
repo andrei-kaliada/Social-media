@@ -40,27 +40,26 @@ export const getAuth = (id,login,email,isAuth) => {
 
 
 
-export const authThunk = () => (dispatch) => {
+export const authThunk = () => async (dispatch) => {
   
-   return autAPI.auth()
-    .then( data => {
-        if(data.resultCode === 0){
+   let response = await autAPI.auth()
+   if(response.resultCode === 0){
             
-           let {id ,email, login } = data.data;
-            dispatch(getAuth(id, login,email, true));
-        }
-    });
+    let {id ,email, login } = response.data;
+     dispatch(getAuth(id, login,email, true));
+ }
+
+  return response;
 }
 
-export const logOutAuthThunk = () => (dispatch) => {
+
+export const logOutAuthThunk = () => async (dispatch) => {
   
-    autAPI.auth()
-    .then( data => {
-        if(data.resultCode === 1){
+    let response = await autAPI.auth()
+    if(response.resultCode === 1){
            
-            dispatch(getAuth(null,null,null,false));
-        }
-    });
+        dispatch(getAuth(null,null,null,false));
+    }
 }
 
 

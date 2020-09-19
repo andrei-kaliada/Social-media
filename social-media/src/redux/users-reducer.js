@@ -1,5 +1,6 @@
 import {usersAPI} from '../api/api';
 import orderBy from 'lodash/orderBy';
+import {updateObjectArray} from '../utils/object-helpers';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -21,43 +22,37 @@ let initialState = {
     sortBy:false
 };
 
+let followUnfollow = (state, action , followedValue) => {
+   return state.users.map((element) => action.userId === element.id ?
+                { 
+                    ...element,
+                    followed: followedValue,
+                } : element)
+}
+
 const userReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case TOGGLE_FOLLOW:return{
+        case TOGGLE_FOLLOW:
+            return{
             ...state,
             users:state.users.map( element => element.id === action.userId ?
                  {...element, followed:!element.followed}: element),
             
         }
-        case FOLLOW:{
-            let stateCopy = {
+        case FOLLOW:
+            
+            return{
                 ...state,
-                users: state.users.map(element => {
-                    if(element.id === action.userId){
-                       return {
-                           ...element,
-                           followed:true,
-                       }
-                    }
-
-                    return element;
-                })  
-            }
-                
-                // users:[...state.users] the same
-                return stateCopy;
+                users:updateObjectArray(state.users, action.userId,"id",{followed:true})
+                // users: followUnfollow(state,action,true)
                 
             }
         case UNFOLLOW:
             return {
                 ...state,
-                // users:[...state.users] the same
-                users: state.users.map((element) =>action.userId === element.id ?
-                { 
-                    ...element,
-                    followed: false,
-                } : element)
+                users:updateObjectArray(state.users, action.userId,"id",{followed:false})
+                // users: followUnfollow(state,action,false)
             }
         case SET_USERS:
             return{
@@ -164,41 +159,33 @@ export const sortUsers = () => {
 }
 
 
-export const getUsers = (currentPage,pageSize) => (dispatch) => {
+export const getUsers =  (currentPage,pageSize) => async (dispatch) => {
     dispatch(setFetchingStatus(false));
     dispatch(setPageNumber(currentPage));
-    usersAPI.getUsers(currentPage,pageSize)
-    .then(data => {
-    dispatch(setUsers(data.items));
-    dispatch(getTotalCount(data.totalCount));
+   let dataUsers = await usersAPI.getUsers(currentPage,pageSize);
+    dispatch(setUsers(dataUsers.items));
+    dispatch(getTotalCount(dataUsers.totalCount));
     dispatch(setFetchingStatus(true));
-});
+
 }
 
-export const followThunk = (id) => (dispatch) => {
+const followUnfollowFlow = async (dispatch, id, apiMethod, actionCreator) => {
     dispatch(toggleDisabledButton(id,true));
-    usersAPI.follow(id)
-    .then(data => {
-        if(data.resultCode === 0){
-            dispatch(follow(id));
-           
-        }
-        dispatch(toggleDisabledButton(id,false));
-        
-    });
+    let dataFollow = await apiMethod(id);
+    if(dataFollow.resultCode === 0){
+     dispatch(actionCreator(id));
+    
+     }
+ dispatch(toggleDisabledButton(id,false));
 }
 
-export const unFollowThunk = (id) => (dispatch) => {
-    dispatch(toggleDisabledButton(id,true));
-    usersAPI.unFollow(id)
-    .then(data => {
-        if(data.resultCode === 0){
-            dispatch(unfollow(id));
-           
-        }
-        dispatch(toggleDisabledButton(id,false));
-        
-    });
+export const followThunk = (id) =>  (dispatch) => {
+    
+    followUnfollowFlow(dispatch, id, usersAPI.follow.bind(usersAPI), follow);
+}
+
+export const unFollowThunk = (id) =>  (dispatch) => {
+    followUnfollowFlow(dispatch, id, usersAPI.unFollow.bind(usersAPI), unfollow);
 }
 
 

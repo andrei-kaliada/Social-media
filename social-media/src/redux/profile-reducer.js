@@ -117,33 +117,26 @@ export const changeFetching = (isFetching) => {
     }
 }
 
-export const profileThunk = (userId) => (dispatch) => {
+export const profileThunk = (userId) => async (dispatch) => {
 
-    usersAPI.profile(userId)
-        .then(data => {
-            dispatch(setUserProfile(data));
-        });
+    let dataUser = await usersAPI.profile(userId)
+        dispatch(setUserProfile(dataUser));
 }
 
-export const getUserStatus = (userId) => (dispatch) => {
-    profileAPI.getStatus(userId)
-        .then(data => {
-            dispatch(setStatus(data))
-        });
+export const getUserStatus = (userId) => async (dispatch) => {
+    let dataGetStatus = await profileAPI.getStatus(userId)
+    dispatch(setStatus(dataGetStatus))
 }
 
 
 
-export const updateUserStatus = (status) => (dispatch) => {
+export const updateUserStatus = (status) => async (dispatch) => {
     dispatch(changeFetching(true));
-    profileAPI.updateStatus(status)
-        .then(response => {
-           
-           if(response.data.resultCode === 0){
-            dispatch(setStatus(status));
-            dispatch(changeFetching(false));
-           }
-        });
+    let dataUpdateStatus = await profileAPI.updateStatus(status)
+    if(dataUpdateStatus.data.resultCode === 0){
+        dispatch(setStatus(status));
+        dispatch(changeFetching(false));
+       }
 
 }
 

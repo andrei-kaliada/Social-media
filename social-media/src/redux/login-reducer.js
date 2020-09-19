@@ -1,28 +1,23 @@
-import {loginAPI} from '../api/api';
-import {authThunk,logOutAuthThunk} from './auth-reduser';
+import { loginAPI } from '../api/api';
+import { authThunk, logOutAuthThunk } from './auth-reduser';
 import { stopSubmit } from 'redux-form';
 
-export const logIn = (dataLogin) => (dispatch) =>{
+export const logIn = (dataLogin) => async (dispatch) => {
 
-    loginAPI.logIn(dataLogin)
-    .then(data => {
-        if(data.resultCode === 0){
-            dispatch(authThunk());  
-        }else{
-            let messages = data.messages.length > 0 ? data.messages[0] : "Some error";
-            dispatch(stopSubmit("login",{_error:`${messages}`}));
-        }
-    })
+    let response = await loginAPI.logIn(dataLogin)
+    if (response.resultCode === 0) {
+        dispatch(authThunk());
+    } else {
+        let messages = response.messages.length > 0 ? response.messages[0] : "Some error";
+        dispatch(stopSubmit("login", { _error: `${messages}` }));
+    }
 }
 
 
-export const logOut = () => (dispatch) =>{
+export const logOut = () => async (dispatch) => {
 
-    loginAPI.logOut()
-    .then(data => {
-        if(data.resultCode === 0){
-            dispatch(logOutAuthThunk());
-        }
-        
-    })
+    let response = await loginAPI.logOut()
+    if (response.resultCode === 0) {
+        dispatch(logOutAuthThunk());
+    }
 }

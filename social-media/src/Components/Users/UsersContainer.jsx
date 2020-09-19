@@ -3,6 +3,7 @@ import { getUsers,followThunk, unFollowThunk, sortUsers} from '../../redux/users
 import Users from './Users';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+import withAuthRedirect from '../../hoc/withAuthRedirect';
 import {getUsersSelect, getPageSize,
      getTotalUsersCount, getCurrentPage,
       getIsFetching ,getIsDisabledBtn} from '../../redux/users-selectors';
@@ -77,6 +78,6 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {getUsers,followThunk,unFollowThunk, sortUsers}),
-    // withAuthRedirect,
+    withAuthRedirect,
     )
     (UsersContainer);

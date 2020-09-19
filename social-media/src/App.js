@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.scss';
 import 'normalize.css';
 import Nav from './Components/Navigation/Nav';
@@ -15,34 +15,28 @@ import {initializApp} from './redux/app-reducer';
 
 
 
-class App extends React.Component{
+const App = props => {
 
+  useEffect(() => {
+    props.initializApp();
+  }, [props.initialization])
 
-  componentDidMount(){
-    this.props.initializApp();
-}
+  if (!props.initialization) {
+    return <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>;
+  }
 
-  render(){
-    if(!this.props.initialization){
-      return <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-    }
-    return (
-        <div className="wrapperApp">
+  return <div className="wrapperApp">
           <HeaderContainer />
           <Nav />
           <div className="wrapperApp__content">
-            <Route exact path="/" render={()=><div>Main page</div>}/>
-            <Route  path="/profile/:userId?"
-             render={() => <ProfileContainer />} />
-            <Route exact  path="/dialogs" render={ () => <DialogsContainer />} />
-            <Route exact  path="/users" render={ () => <UsersContainer />} />
-            <Route exact path="/login" render={ () => <Login />} />
+            <Route exact path="/" render={() => <div>Main page</div>} />
+            <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
+            <Route exact path="/dialogs" render={() => <DialogsContainer />} />
+            <Route exact path="/users" render={() => <UsersContainer />} />
+            <Route exact path="/login" render={() => <Login />} />
           </div>
-        </div>
-    );
-  }
-  
-}
+        </div>;
+};
 
 let mapStateToProps = (state) => {
   return {

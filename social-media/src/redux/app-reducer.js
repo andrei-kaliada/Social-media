@@ -41,9 +41,9 @@ export let initializedSuccess = () => {
     }
 }
 
-export let initializApp = () => (dispatch) => {
+export let initializApp = () => async (dispatch) => {
 
-    let promise = dispatch(authThunk());
+    let promise = await dispatch(authThunk());
 
     Promise.all([promise])
     .then(() => {
