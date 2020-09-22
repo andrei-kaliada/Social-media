@@ -36,11 +36,11 @@ const MyPosts = (props) => {
   
 
   let submit = value => {
-    console.log(value.myPostMessage);
+
     props.addPost(value.myPostMessage);
   };
 
-  console.log("RENDER");
+
   let posts  = props.posts.map(post => <Post key={post.id} message={post.message} likes={post.likeCount} />)
 
   return <div className="bostsBlock">

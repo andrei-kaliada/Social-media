@@ -13,14 +13,15 @@ class UsersContainer extends React.Component {
     
 
     componentDidMount() {
-      
-        this.props.getUsers(this.props.currentPage,this.props.pageSize);
+      const {currentPage, pageSize} = this.props;
+
+        this.props.getUsers(currentPage,pageSize);
     }
 
     requestUsers = (element) =>{
-       
+       const {pageSize} = this.props;
       
-        this.props.getUsers(element,this.props.pageSize);
+        this.props.getUsers(element,pageSize);
   
     }
 

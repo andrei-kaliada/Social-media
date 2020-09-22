@@ -1,4 +1,6 @@
-
+.wrappPagination{
+    display: inline-block;
+}
 
 .pageCount{
     padding: 5px;
@@ -10,5 +12,11 @@
 .selectedPage{
     font-weight: bold;
     border: 1px solid black;
+}
+
+.selectPageInput{
+    width: 50px;
+    height: 100%;
+    margin: 0 5px;
 }
 
