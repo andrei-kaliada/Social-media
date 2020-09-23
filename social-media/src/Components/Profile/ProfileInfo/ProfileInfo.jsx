@@ -28,15 +28,12 @@ const ProfileInfo = ({profile, status, updateUserStatus, isFetching}) => {
    
     return (
         <>
+        <div>
+   <label for="file">Choose file to upload</label>
+   <input type="file" id="file" name="file" multiple />
+ </div>
 
-<div className={classes.root}>
-      <input
-        accept="image/*"
-        className={classes.input}
-        id="contained-button-file"
-        multiple
-        type="file"
-      />
+  <div className={classes.root}>
       <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
       <label htmlFor="icon-button-file">
         <IconButton color="primary" aria-label="upload picture" component="span">
