@@ -1,46 +1,54 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {setUserProfile, profileThunk, getUserStatus, updateUserStatus} from '../../redux/profile-reducer';
+import {setUserProfile, profileThunk, getUserStatus, updateUserStatus, updateProfilePhoto} from '../../redux/profile-reducer';
 import { withRouter, Redirect } from "react-router";
 import withAuthRedirect  from '../../hoc/withAuthRedirect';
 
-
-
-class ProfileContainer extends React.Component {
- 
-   
-    componentDidMount() {
+// componentDidMount() {
     
-        let userId = this.props.match.params.userId;  
-        
-       
+//     let userId = this.props.match.params.userId;  
+    
+   
+//     if(!userId){
+//         userId = this.props.authId;
+//         // if(!userId){
+//         //     this.props.history.push('/login')
+//         // }
+//     }
+    
+//     this.props.profileThunk(userId);
+//     this.props.getUserStatus(userId);
+          
+// }
+
+const ProfileContainer = props => {
+
+    useEffect(()=>{
+        let userId = props.match.params.userId;  
+    
+   
         if(!userId){
-            userId = this.props.authId;
+            userId = props.authId;
             // if(!userId){
             //     this.props.history.push('/login')
             // }
         }
         
-        this.props.profileThunk(userId);
-        this.props.getUserStatus(userId);
-              
-    }
+        props.profileThunk(userId);
+        props.getUserStatus(userId);
+    },[props.match.params.userId])
 
 
-    render() {
-        
+  if (!props.isAuth) {
+    return <Redirect to="/login" />;
+  }
 
-        if(!this.props.isAuth){
-            return <Redirect to="/login"/>
-        }
-        
-        return (
-            <Profile {...this.props} profile={this.props.userProfileData}/>
-        );
-    }
-}
+ 
+
+  return <Profile {...props} userId={props.match.params.userId} profile={props.userProfileData} />;
+};
 
 
 let mapStateToProps = (state) => {
@@ -54,7 +62,7 @@ let mapStateToProps = (state) => {
 }
 
 export default compose (
-    connect(mapStateToProps,{setUserProfile,profileThunk, getUserStatus, updateUserStatus}),
+    connect(mapStateToProps,{setUserProfile,profileThunk, getUserStatus, updateUserStatus, updateProfilePhoto}),
     withRouter,
     // withAuthRedirect,
 )(ProfileContainer);

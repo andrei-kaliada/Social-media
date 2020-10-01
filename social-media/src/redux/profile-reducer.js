@@ -7,6 +7,7 @@ const SET_STATUS = 'SET_STATUS';
 const CHANGE_FETCHING = 'CHANGE_FETCHING';
 const REVERCE_MESSAGES = 'REVERCE_MESSAGES';
 const DELETE_POST = 'DELETE_POST';
+const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 
 
 let initialState = {
@@ -63,6 +64,14 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 posts:[...state.posts.reverse()]
             }
+        case SAVE_PHOTO_SUCCESS:
+            return{
+                ...state,
+                userProfileData:{
+                    ...state.userProfileData,
+                    photos:action.photos
+                }
+            }
         default: return state;
     }
 }
@@ -117,6 +126,14 @@ export const changeFetching = (isFetching) => {
     }
 }
 
+export  const savePhotoSuccess = (photos) => {
+ 
+    return{
+        type:'SAVE_PHOTO_SUCCESS',
+        photos
+    }
+}
+
 export const profileThunk = (userId) => async (dispatch) => {
 
     let dataUser = await usersAPI.profile(userId)
@@ -138,6 +155,16 @@ export const updateUserStatus = (status) => async (dispatch) => {
         dispatch(changeFetching(false));
        }
 
+}
+
+export const updateProfilePhoto = (image) => async (dispatch) => {
+    let response = await profileAPI.updatePhoto(image);
+
+    if(response.resultCode === 0){
+        
+        dispatch(savePhotoSuccess(response.data.photos));
+    }
+    console.log(response);
 }
 
 export default profileReducer;

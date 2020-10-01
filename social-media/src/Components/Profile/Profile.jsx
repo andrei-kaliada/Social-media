@@ -4,7 +4,7 @@ import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 
 export default function Profile(props) {
- 
+
     return (
         <div className="MainContent">
                 <ProfileInfo {...props}  profile={props.profile}/>

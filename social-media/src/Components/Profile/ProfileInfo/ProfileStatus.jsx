@@ -31,14 +31,16 @@ function ProfileStatus(props){
         
         return (
             <div>
-                {!editMode
+                { !props.userId ? 
+               <div>
+                    {!editMode
                     ?
                     <div>
                         
                         <span id="statusText" onClick={activateEditMode}>Status:{props.isFetching ?
-
+    
                             <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-
+    
                             : textStatus}</span>
                     </div>
                     :
@@ -51,6 +53,9 @@ function ProfileStatus(props){
                         />
                     </div>
                 }
+               </div>
+             :  textStatus  
+            }
             </div>
         );
     }

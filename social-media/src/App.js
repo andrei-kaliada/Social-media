@@ -37,7 +37,7 @@ const App = props => {
             <Route exact path="/users" render={LazyLoad(UsersContainer)} />
             <Route exact path="/login" render={LazyLoad(Login)} />
           </div>
-        </div>;
+        </div>
 };
 
 let mapStateToProps = (state) => {
