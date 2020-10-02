@@ -164,7 +164,6 @@ export const updateProfilePhoto = (image) => async (dispatch) => {
         
         dispatch(savePhotoSuccess(response.data.photos));
     }
-    console.log(response);
 }
 
 export default profileReducer;

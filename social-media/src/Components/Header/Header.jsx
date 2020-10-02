@@ -10,15 +10,12 @@ import { NavLink } from 'react-router-dom';
 
     return(
         <header className="header">
-                <div className="headerWrapper">
-                    <div className="headerWrapper__logo">
-                      <Link to="/">
+                      <Link to="/" className="header-logo">
                          <h1>Logo</h1>
                       </Link>
-                    </div>
-
-                    
-                    { props.isAuth ? 
+            
+                   <div className="header-btn">
+                   { props.isAuth ? 
                       <div>
                         <p>{props.login}</p>
                         <Button onClick={props.logOut} variant="contained" color="primary">
@@ -33,7 +30,7 @@ import { NavLink } from 'react-router-dom';
                         </Button>
                         </NavLink>
                     }
-                </div>
+                   </div>
             </header>
     );
 }
