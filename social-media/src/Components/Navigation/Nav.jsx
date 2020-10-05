@@ -1,41 +1,48 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Nav.scss';
-import classNames from 'classnames/bind';
+// import classNames from 'classnames/bind';
 
 import './Nav.scss';
 
 const Nav = () => {
-    return(
+    return (
         <nav className="nav">
             <ul>
-                <NavLink to="/profile"
-                 className={classNames('nav__link')}
-                 activeClassName="nav__link-active"
-                 >
-                    <li>Profile</li>
+                <li>
+                    <NavLink to="/profile"
+                        className={'nav__link'}
+                        activeClassName="nav__link-active"
+                    >
+                        Profile
+                     </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/dialogs"
+                        className={'nav__link'}
+                        activeClassName="nav__link-active"
+                    >
+                        Message
                 </NavLink>
-                <NavLink to="/dialogs"  
-                className={classNames('nav__link')}
-                activeClassName="nav__link-active"
-                >
-                    <li>Message</li>
-                </NavLink>
-                <NavLink to="/users"
-                className={classNames('nav__link')}
-                activeClassName="nav__link-active"
-                >
-                    <li>Users</li>
-                </NavLink>
-                {/* <Link to="/">
-                    <li>News</li>
-                </Link>
-                <Link to="/">
-                    <li>Music</li>
-                </Link>
-                <Link to="/">
-                    <li>Setting</li>
-                </Link> */}
+                </li>
+                <li>
+                    <NavLink to="/users"
+                        className={'nav__link'}
+                        activeClassName="nav__link-active"
+                    >
+                        Users
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/">
+                        News
+                        </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/">
+                        Groups
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     );

@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import classNames from 'classnames/bind';
 import './Paginator.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import {Pagination} from '@material-ui/lab';

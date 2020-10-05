@@ -1,3 +1,4 @@
+
 *{
   text-decoration: none;
   text-transform: none;
@@ -18,31 +19,29 @@ a{
   color:#152766;
 }
 
-.wrapperApp{
+.App{
 
-  display: grid;
-  grid-template-areas: 
-  "header header"
-  "nav MainContent";
-  grid-template-rows: 60px 1fr;
-  grid-template-columns: 2fr 10fr;
+//   display: grid;
+//   grid-template-columns: auto;
+//   grid-template-areas: 
+//   "header"
+//   "MainContent";
+//  justify-self: center;
 
-  &__content{
-    grid-row: "c";
-    
-    
-  }
+//   .mainContent{
+//     grid-area: nav;
+//   }
+
+//   .header{
+//     grid-area: header;
+//   }
 
 }
 
-.header{
-  grid-area: header;
+.test{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.nav{
-  grid-area: nav;
-}
-
-.MainContent{
-  grid-area: MainContent;
-}

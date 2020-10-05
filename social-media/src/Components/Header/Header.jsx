@@ -3,6 +3,8 @@ import './Header.scss';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { NavLink } from 'react-router-dom';
+import LogoSvg from '../../assets/images/logo.svg';
+import Nav from '../Navigation/Nav';
 
 
 
@@ -11,24 +13,34 @@ import { NavLink } from 'react-router-dom';
     return(
         <header className="header">
                       <Link to="/" className="header-logo">
-                         <h1>Logo</h1>
+                         <img src={LogoSvg} alt="logo"/>
+                         <p>Just join it</p>
                       </Link>
+                    <div className="header-nav">
+                        <Nav />
+                    </div>
             
                    <div className="header-btn">
                    { props.isAuth ? 
-                      <div>
+                      <div class="header-btn__logout">
                         <p>{props.login}</p>
+                        <div>
                         <Button onClick={props.logOut} variant="contained" color="primary">
                               LogOut
                           </Button>
+                        </div>
                       </div>
                         
                     :
-                        <NavLink to='/login'>
-                        <Button variant="contained" color="primary">
-                            LogIn
-                        </Button>
-                        </NavLink>
+                    <div class="header-btn__login">
+                        <div class="btnLogin">
+                            <NavLink to='/login' >
+                            <Button variant="contained" color="primary">
+                                LogIn
+                            </Button>
+                            </NavLink>
+                        </div>
+                    </div>
                     }
                    </div>
             </header>

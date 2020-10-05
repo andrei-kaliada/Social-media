@@ -61,6 +61,10 @@ export const profileAPI = {
         'Content-Type': 'multipart/form-data'
       }
   }).then(response => response.data);
+  },
+
+  updateRofile(data){
+    return instance.put('/profile',data).then(response => response.data);
   }
 
 }

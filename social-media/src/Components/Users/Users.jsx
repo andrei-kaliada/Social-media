@@ -1,6 +1,6 @@
 import React from 'react';
 import userPhoto from '../../assets/images/unnamed.png';
-import classNames from 'classnames/bind';
+// import classNames from 'classnames/bind';
 import './Users.scss';
 import { NavLink } from 'react-router-dom';
 import Paginator from '../common/Paginator/Paginator';
@@ -16,7 +16,7 @@ let Users = ({props, requestUsers, followUser,unFollowUser}) =>{
 
    
     return(
-        <div>
+        <div className="users">
             <div>
                 <Paginator
                 totalUsersCount={totalUsersCount} 
@@ -28,7 +28,7 @@ let Users = ({props, requestUsers, followUser,unFollowUser}) =>{
               
                { isFetching ? 
                
-               <div>
+               <div className="users-items">
                    <button onClick={sortUsers}>Sort Users</button>
                     {
                     users && users.map((element) => (

@@ -24,13 +24,15 @@ const App = props => {
   }, [props.initialization])
 
   if (!props.initialization) {
-    return <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>;
+    return <div className="test">
+      <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>;
   }
 
-  return <div className="wrapperApp">
+  return <div className="App">
           <HeaderContainer />
-          <Nav />
-          <div className="wrapperApp__content">
+          {/* <Nav /> */}
+          <div className="mainContent">
             <Route exact path="/" render={() => <div>Main page</div>} />
             <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
             <Route exact path="/dialogs" render={LazyLoad(DialogsContainer)} />

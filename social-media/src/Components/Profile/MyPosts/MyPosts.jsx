@@ -43,8 +43,8 @@ const MyPosts = (props) => {
 
   let posts  = props.posts.map(post => <Post key={post.id} message={post.message} likes={post.likeCount} />)
 
-  return <div className="bostsBlock">
-            <div className="bostsBlock__title">
+  return <div className="profile-posts">
+            <div className="profile-posts__title">
                 <h3>My posts</h3>
             </div>
             <div>

@@ -1,18 +1,63 @@
 .header {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
-    grid-template-areas: "header-logo  header-nav";
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows:1fr;
+    grid-template-areas: "header-logo header-nav header-auth";
     background: #FFFFFF;
     box-shadow: 0px 6px 15px rgba(47, 128, 237, 0.1);
+    min-height: 80px;
+    align-items:center;
+
+    &-nav{
+        grid-area:header-nav;
+    }
     
     &-logo{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
         grid-area:header-logo;
-        grid-column: 1/2;
+        justify-self: center;
+        align-items:center;
+       
+        p{
+            margin-bottom: 0;
+        }
+
+        img{
+            justify-self: center;
+            width: 45px;
+        }
+
+        &:hover{
+            text-decoration: none;
+        }
+        
     }
 
     &-btn{
-        grid-area:header-nav;
-        grid-column: 5/6;
+        grid-area:header-auth;
+        &__logout{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items:center;
+            grid-column-gap: 20px;
+
+            P{
+                margin-bottom: 0;
+            }
+        }
+
+        &__login{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items:center;
+            grid-template-areas: ". btn-login";
+
+            .btnLogin{
+                grid-area:btn-login;
+            }
+        }
+       
     }
     
 }

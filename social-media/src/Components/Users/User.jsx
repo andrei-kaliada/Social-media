@@ -1,6 +1,6 @@
 import React from 'react';
 import userPhoto from '../../assets/images/unnamed.png';
-import classNames from 'classnames/bind';
+// import classNames from 'classnames/bind';
 import './Users.scss';
 import { NavLink } from 'react-router-dom';
 import Paginator from '../common/Paginator/Paginator';
@@ -11,7 +11,7 @@ let Users = ({unFollowUser, followUser, isDisabledBtn, element:{id,name, status,
     return(
         <div>
                     {
-                        <div>
+                        <div className="users-items__item">
                             <span>
                                 <div>
                                     <NavLink to={`/profile/${id}`}>

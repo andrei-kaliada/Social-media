@@ -1,6 +1,45 @@
-.descriptionBlock{
+.profile-info{
+  // background-image: url('https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+  &__description{
     padding: 10px;
+    
+    .imageBlock{
+      position: relative;
+      
+      img{
+        border-radius: 50%;
+        width: 165px;
+      }
+
+      &__uploadBtn{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+
+        .MuiButtonBase-root{
+          background: #fff;
+          border-radius:50%;
+        }
+        
+      }
+    }
+
+    
+  }
+
+  .description__edit-profile{
+    display: flex;
+    justify-content: center;
+
+   
+  }
+
+  
 }
+
+
+
+
 
 .lds-default {
     display: inline-block;
