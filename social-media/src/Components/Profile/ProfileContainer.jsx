@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {setUserProfile, profileThunk, getUserStatus, updateUserStatus, updateProfilePhoto} from '../../redux/profile-reducer';
+import {setUserProfile, profileThunk, getUserStatus, updateUserStatus, updateProfilePhoto, updateProfileData} from '../../redux/profile-reducer';
 import { withRouter, Redirect } from "react-router";
 import withAuthRedirect  from '../../hoc/withAuthRedirect';
 
@@ -38,7 +38,7 @@ const ProfileContainer = props => {
         
         props.profileThunk(userId);
         props.getUserStatus(userId);
-    },[props.match.params.userId])
+    },[props])
 
 
   if (!props.isAuth) {
@@ -62,7 +62,7 @@ let mapStateToProps = (state) => {
 }
 
 export default compose (
-    connect(mapStateToProps,{setUserProfile,profileThunk, getUserStatus, updateUserStatus, updateProfilePhoto}),
+    connect(mapStateToProps,{setUserProfile,profileThunk, getUserStatus, updateUserStatus, updateProfilePhoto, updateProfileData}),
     withRouter,
     // withAuthRedirect,
 )(ProfileContainer);

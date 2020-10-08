@@ -1,5 +1,4 @@
 import { usersAPI, profileAPI } from '../api/api';
-
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const NEW_USER_PROFILE = 'NEW_USER_PROFILE';
@@ -8,6 +7,7 @@ const CHANGE_FETCHING = 'CHANGE_FETCHING';
 const REVERCE_MESSAGES = 'REVERCE_MESSAGES';
 const DELETE_POST = 'DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
+const SET_PROFILE_DATA = 'SET_PROFILE_DATA';
 
 
 let initialState = {
@@ -72,6 +72,11 @@ const profileReducer = (state = initialState, action) => {
                     photos:action.photos
                 }
             }
+        case SET_PROFILE_DATA:
+            return{
+                ...state,
+                userProfileData:{...action.data}
+            }
         default: return state;
     }
 }
@@ -134,6 +139,13 @@ export  const savePhotoSuccess = (photos) => {
     }
 }
 
+export const setProfileData = (data) => {
+    return{
+        type:"SET_PROFILE_DATA",
+        data
+    }
+}
+
 export const profileThunk = (userId) => async (dispatch) => {
 
     let dataUser = await usersAPI.profile(userId)
@@ -163,6 +175,15 @@ export const updateProfilePhoto = (image) => async (dispatch) => {
     if(response.resultCode === 0){
         
         dispatch(savePhotoSuccess(response.data.photos));
+    }
+}
+
+export const updateProfileData = (data) => async (dispatch) =>{
+    let response = await profileAPI.updateProfile(data);
+    console.log(response);
+    if(response.resultCode === 0){
+        let dataUser = await usersAPI.profile(data.userId)
+        dispatch(setUserProfile(dataUser));
     }
 }
 

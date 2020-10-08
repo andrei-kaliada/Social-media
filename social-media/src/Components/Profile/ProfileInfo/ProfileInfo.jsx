@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProfileInfo = ({ profile, status, updateUserStatus, isFetching, updateProfilePhoto, authId, userId }) => {
+const ProfileInfo = ({ profile, status, updateUserStatus, isFetching, updateProfilePhoto, authId, userId, updateProfileData }) => {
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -41,6 +41,8 @@ const ProfileInfo = ({ profile, status, updateUserStatus, isFetching, updateProf
   const [lookingForAJob, setLookingForAJob] = React.useState(null);
   const [lookingForAJobDescription, setLookingForAJobDescription] = React.useState(null);
   const [contacts, setContacts] = React.useState({});
+
+ console.log(profile);
 
   const handleOpen = () => {
     setOpen(true);
@@ -60,16 +62,31 @@ const ProfileInfo = ({ profile, status, updateUserStatus, isFetching, updateProf
 
     let file = e.target.files[0];
     updateProfilePhoto(file);
-
-
   }
 
+  const hundlerUpdateProfile = () => {
+    let data = {
+      userId:authId,
+      lookingForAJob:true,
+      lookingForAJobDescription:'Nice job',
+      fullName:fullName,
+      aboutMe:'Always be yourself, express yourself, have faith in yourself',
+      contacts:{
+        github:'',
+          vk:'',
+          facebook:'',
+          instagram:'',
+          twitter:'',
+          website:'',
+          youtube:'',
+          mainLink:'',
+      }
+    }
+    updateProfileData(data);
+  }
 
   return (
     <div className="profile-info">
-
-
-
       <div className="profile-info__description description">
         <div className="description__imageBlock imageBlock">
           {profile.photos.small ?
@@ -116,18 +133,17 @@ const ProfileInfo = ({ profile, status, updateUserStatus, isFetching, updateProf
               <div className="modal__main-content main-content">
                 <p>Customize Your Intro</p>
                 <div className="main-content__inputs">
-                  <p>Full Name: <input type="text"/></p>
+                  <p>Full name: <input onChange={e=>setFullName(e.target.value)} type="text"/></p>
                 </div>
               </div>
               <div className="modal__editBtn">
-                <button>Edit Your About Info</button>
+                <button onClick={hundlerUpdateProfile}>Edit Your About Info</button>
               </div>
             </div>
           </div>
         </Fade>
       </Modal>
     </div>
-        <p>{profile.aboutMe}</p>
         <ProfileStatus
           userId={userId}
           isFetching={isFetching}
@@ -135,7 +151,43 @@ const ProfileInfo = ({ profile, status, updateUserStatus, isFetching, updateProf
           updateUserStatus={updateUserStatus}
         />
       </div>
+     <ProfileDate profile={profile} />
     </div>
+  );
+}
+
+const ProfileDate = ({profile}) => {
+  return (
+    <>
+      <div className="description__fullName">
+    <p>Full name:{profile.fullName}</p>
+  </div>
+  <div className="description__aboutMe">
+    <p>{profile.aboutMe}</p>
+  </div>
+  <div className="description__job">
+  <p>Locking for a job:{profile.lookingForAJob ? 'Yes' : 'No'}</p>
+    {profile.lookingForAJob && 
+      <p>My professional skills:{profile.lookingForAJobDescription}</p>
+    }
+  </div>
+  <div className="description__contacts">
+  <p>Contacts:{
+      Object.keys(profile.contacts).map( key => (
+        <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+      ))
+    }</p>
+</div>
+    </>
+  );
+}
+
+const Contact = ({contactTitle, contactValue}) => {
+
+  return(
+    <p>
+      {`${contactTitle}:${contactValue}`}
+    </p>
   );
 }
 

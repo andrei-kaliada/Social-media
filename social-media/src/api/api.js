@@ -63,7 +63,7 @@ export const profileAPI = {
   }).then(response => response.data);
   },
 
-  updateRofile(data){
+  updateProfile(data){
     return instance.put('/profile',data).then(response => response.data);
   }
 
