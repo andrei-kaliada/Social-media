@@ -8,6 +8,8 @@ import { PhotoCamera } from '@material-ui/icons';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import ProfileDate from './ProfileDate/ProfileDate';
+import ProfileDataForm from './ProfileDataForm/ProfileDataForm';
 
 
 
@@ -127,18 +129,10 @@ const ProfileInfo = ({ profile, status, updateUserStatus, isFetching, updateProf
         <Fade in={open}>
           <div className={classes.paper}>
             <div>
-              <div className="modal__header">
-                <h3>Edit Profile</h3>
-              </div>
-              <div className="modal__main-content main-content">
-                <p>Customize Your Intro</p>
-                <div className="main-content__inputs">
-                  <p>Full name: <input onChange={e=>setFullName(e.target.value)} type="text"/></p>
-                </div>
-              </div>
-              <div className="modal__editBtn">
-                <button onClick={hundlerUpdateProfile}>Edit Your About Info</button>
-              </div>
+              <ProfileDataForm 
+              hundlerUpdateProfile={hundlerUpdateProfile}
+              setFullName={setFullName}
+              />
             </div>
           </div>
         </Fade>
@@ -156,39 +150,7 @@ const ProfileInfo = ({ profile, status, updateUserStatus, isFetching, updateProf
   );
 }
 
-const ProfileDate = ({profile}) => {
-  return (
-    <>
-      <div className="description__fullName">
-    <p>Full name:{profile.fullName}</p>
-  </div>
-  <div className="description__aboutMe">
-    <p>{profile.aboutMe}</p>
-  </div>
-  <div className="description__job">
-  <p>Locking for a job:{profile.lookingForAJob ? 'Yes' : 'No'}</p>
-    {profile.lookingForAJob && 
-      <p>My professional skills:{profile.lookingForAJobDescription}</p>
-    }
-  </div>
-  <div className="description__contacts">
-  <p>Contacts:{
-      Object.keys(profile.contacts).map( key => (
-        <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-      ))
-    }</p>
-</div>
-    </>
-  );
-}
 
-const Contact = ({contactTitle, contactValue}) => {
 
-  return(
-    <p>
-      {`${contactTitle}:${contactValue}`}
-    </p>
-  );
-}
-
+  
 export default ProfileInfo;
