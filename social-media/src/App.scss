@@ -1,47 +1,36 @@
-
-*{
+* {
   text-decoration: none;
   text-transform: none;
   list-style-type: none;
-  
 }
-body{
-  background: #F7F7F7;
+body {
+  background: #f7f7f7;
 }
-p{
-  color:#152766;
+p {
+  color: #152766;
   font-family: Lato;
-            font-style: normal;
-            font-weight: 900;
+  font-style: normal;
+  font-weight: 900;
 }
 
-a{
-  color:#152766;
+a {
+  color: #152766;
 }
 
-.App{
+.App {
+    display: grid;
+   
+    grid-template-areas:
+    "header header"
+    "Nav MainContent";
+ 
 
-//   display: grid;
-//   grid-template-columns: auto;
-//   grid-template-areas: 
-//   "header"
-//   "MainContent";
-//  justify-self: center;
-
-//   .mainContent{
-//     grid-area: nav;
-//   }
-
-//   .header{
-//     grid-area: header;
-//   }
-
+    
 }
 
-.test{
+.test {
   display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-

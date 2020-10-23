@@ -17,7 +17,7 @@ import Nav from '../Navigation/Nav';
                          <p>Just join it</p>
                       </Link>
                     <div className="header-nav">
-                        <Nav />
+                       
                     </div>
             
                    <div className="header-btn">

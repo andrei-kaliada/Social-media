@@ -31,7 +31,7 @@ const App = props => {
 
   return <div className="App">
           <HeaderContainer />
-          {/* <Nav /> */}
+          <Nav />
           <div className="mainContent">
             <Route exact path="/" render={() => <div>Main page</div>} />
             <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
