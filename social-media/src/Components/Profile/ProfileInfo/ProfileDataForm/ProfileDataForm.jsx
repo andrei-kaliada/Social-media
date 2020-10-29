@@ -1,22 +1,45 @@
 import React from 'react';
 import {CreateField} from '../../../common/FormsControls/FormsControls';
+import {Input, TextArea} from '../../../common/FormsControls/FormsControls';
+import { reduxForm } from 'redux-form';
 
-export default function ProfileDataForm({setFullName, hundlerUpdateProfile}) {
+export  function ProfileDataForm({setFullName, hundlerUpdateProfile, profile, handleSubmit}) {
+ 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className="modal__header">
                 <h3>Edit Profile</h3>
               </div>
               <div className="modal__main-content main-content">
                 <p>Customize Your Intro</p>
                 <div className="main-content__inputs">
-                  <p>Full name: <input onChange={e=>setFullName(e.target.value)} type="text"/></p>
-                  <p>Full name: <CreateField /></p>
+                  <div>
+                  <p>Full name: {CreateField("Full name", "fullName", [], Input)} </p>
+                  </div>
+                  <div>
+                  <p>Looking for a job: {profile.lookingForAJob ? "Yes" : "No"} </p>
+                  {CreateField("","lookingForAJob",[],Input, {type:"checkbox"})}
+                  </div>
+                  <div>
+                  <p>My professional skills:{profile.lookingForAJobDescription}</p>
+                  {CreateField("Descriptions skills","skills",[],TextArea, )}
+                  </div>
+                  <div>
+                  <p>About Me:{profile.aboutMe}</p>
+                  {CreateField("About me","aboutMe",[],Input, )}
+                  </div>
+
                 </div>
+                
               </div>
-              <div className="modal__editBtn">
-                <button onClick={hundlerUpdateProfile}>Edit Your About Info</button>
+              <div>
+                <button onClick={()=>{}}>Save</button>
               </div>
         </form>
     )
 }
+
+
+export default reduxForm({
+  form:'profileDataForm',
+})(ProfileDataForm);

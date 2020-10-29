@@ -12,9 +12,7 @@
       }
 
       &__uploadBtn{
-        position: absolute;
-        right: 0;
-        bottom: 0;
+      
 
         .MuiButtonBase-root{
           background: #fff;
@@ -26,16 +24,9 @@
 
     
   }
-
-  .description__edit-profile{
-    display: flex;
-    justify-content: center;
-
-   
-  }
-
-  
 }
+
+
 
 
 

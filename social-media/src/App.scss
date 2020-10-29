@@ -19,14 +19,28 @@ a {
 
 .App {
     display: grid;
+    grid-row: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
    
     grid-template-areas:
     "header header"
-    "Nav MainContent";
- 
-
+    "nav mainContent";
     
 }
+
+.header{
+  grid-area: header;
+}
+
+.nav{
+  grid-area:nav;
+}
+
+
+.mainContent{
+  grid-area: mainContent;
+}
+
 
 .test {
   display: flex;

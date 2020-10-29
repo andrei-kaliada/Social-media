@@ -1,7 +1,9 @@
 import React from 'react';
 import Contact from '../ContactProfile/ContactProfile';
 
+
 export default function ProfileDate({profile}){
+  
     return (
       <>
         <div className="description__fullName">

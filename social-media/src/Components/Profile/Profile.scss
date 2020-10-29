@@ -1,20 +1,20 @@
 .profile{
-    display: grid;
-    grid-template-columns: 1fr 5fr 1fr;
-    grid-template-areas: 
-    ". info ."
-    ". posts ."
-    ;
+    // display: grid;
+    // grid-template-columns: 1fr 5fr 1fr;
+    // grid-template-areas: 
+    // ". info ."
+    // ". posts ."
+    // ;
 
-    &-info{
-        grid-area: info;
-        display: grid;
-        justify-self: center;
-    }
+    // &-info{
+    //     grid-area: info;
+    //     display: grid;
+    //     justify-self: center;
+    // }
 
-    &-posts{
-        grid-area: posts;
-        display: grid;
-        justify-self: center;
-    }
+    // &-posts{
+    //     grid-area: posts;
+    //     display: grid;
+    //     justify-self: center;
+    // }
 }
