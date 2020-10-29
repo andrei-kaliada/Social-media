@@ -63,8 +63,8 @@ export const profileAPI = {
   }).then(response => response.data);
   },
 
-  updateProfile(data){
-    return instance.put('/profile',data).then(response => response.data);
+  updateProfile(dataProfile){
+    return instance.put('/profile',dataProfile).then(response => response.data);
   }
 
 }

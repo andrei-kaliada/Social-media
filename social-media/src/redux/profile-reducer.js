@@ -178,12 +178,19 @@ export const updateProfilePhoto = (image) => async (dispatch) => {
     }
 }
 
-export const updateProfileData = (data) => async (dispatch) =>{
-    let response = await profileAPI.updateProfile(data);
+export const updateProfileData = (dataProfile,userId) => async (dispatch,getState) =>{
+    
+    const id = getState().auth.userId;
+
+    let response = await profileAPI.updateProfile(dataProfile);
     console.log(response);
+   
     if(response.resultCode === 0){
-        let dataUser = await usersAPI.profile(data.userId)
+        let dataUser = await usersAPI.profile(userId)
+        
         dispatch(setUserProfile(dataUser));
+    }else{
+        
     }
 }
 

@@ -45,9 +45,8 @@ const ProfileInfo = ({
 }) => {
   const classes = useStyles();
   const [editMode, setEditMode] = React.useState(false);
-  const [fullName, setFullName] = React.useState(null);
 
-  console.log(profile);
+ 
 
   if (!profile) {
     return (
@@ -79,48 +78,11 @@ const ProfileInfo = ({
     updateProfilePhoto(file);
   };
 
-  const hundlerUpdateProfile = () => {
-    // let data = {
-    //   userId: authId,
-    //   lookingForAJob: true,
-    //   lookingForAJobDescription: "Nice job",
-    //   fullName: fullName,
-    //   aboutMe: "Always be yourself, express yourself, have faith in yourself",
-    //   contacts: {
-    //     github: "",
-    //     vk: "",
-    //     facebook: "",
-    //     instagram: "",
-    //     twitter: "",
-    //     website: "",
-    //     youtube: "",
-    //     mainLink: "",
-    //   },
-    // };
-    // updateProfileData(data);
-    setEditMode(false);
-  };
 
   const submit = (value) => {
-    console.log(value);
-        // let data = {
-    //   userId: authId,
-    //   lookingForAJob: true,
-    //   lookingForAJobDescription: "Nice job",
-    //   fullName: fullName,
-    //   aboutMe: "Always be yourself, express yourself, have faith in yourself",
-    //   contacts: {
-    //     github: "",
-    //     vk: "",
-    //     facebook: "",
-    //     instagram: "",
-    //     twitter: "",
-    //     website: "",
-    //     youtube: "",
-    //     mainLink: "",
-    //   },
-    // };
-    // updateProfileData(data);
+    let id = !userId ? authId : userId;
+
+    updateProfileData(value,id);
     setEditMode(false);
   }
 

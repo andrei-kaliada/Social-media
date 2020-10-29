@@ -27,8 +27,8 @@ const ProfileContainer = props => {
 
     useEffect(()=>{
         let userId = props.match.params.userId;  
-    
-   
+        console.log("Hello");
+        console.log(userId);
         if(!userId){
             userId = props.authId;
             // if(!userId){
@@ -38,8 +38,9 @@ const ProfileContainer = props => {
         
         props.profileThunk(userId);
         props.getUserStatus(userId);
-    },[props])
+    },[props.match.params.userId])
 
+    console.log('Profile');
 
   if (!props.isAuth) {
     return <Redirect to="/login" />;

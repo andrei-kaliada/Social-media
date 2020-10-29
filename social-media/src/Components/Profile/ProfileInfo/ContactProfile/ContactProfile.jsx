@@ -4,7 +4,7 @@ const Contact = ({contactTitle, contactValue}) => {
 
     return(
       <p>
-        {`${contactTitle}:${contactValue}`}
+       {`${contactTitle}:`}<a href={contactValue}>{contactValue}</a>
       </p>
     );
   }
