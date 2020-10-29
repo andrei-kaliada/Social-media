@@ -20,7 +20,7 @@ function LoginForm(props) {
                      validate={[required, maxLengthCreator]}/>
                 </div>
                 <div>
-                    <Field type={'checkbox'} name="rememberMe" component={Input}/> remember me
+                    <Field type={'checkbox'} name="rememberMe" component={Input}/> Remember me
                 </div>
                 {props.error && 
                 <div className="form-summary-error">
