@@ -8,7 +8,7 @@ const maxLengthCreator = maxLength(50);
 
 function LoginForm(props) {
     const { handleSubmit } = props;
-    
+   
     return (
         <form onSubmit={handleSubmit}>
                 <div>
@@ -30,6 +30,16 @@ function LoginForm(props) {
                 <div>
                     <button>Login</button>
                 </div>
+                {props.captcha && 
+                
+                <div>
+                    <img src={props.captcha} alt="captcha"/>
+                    <p>Incorrect anti-bot symbols.</p>
+                    <p>Input number in this picture.</p>
+                    <Field placeholder={'Captca'} name={"captcha"} component={Input} />
+                </div>
+                
+                }
             </form>
     )
 }

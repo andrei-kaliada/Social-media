@@ -25,7 +25,7 @@ class Login extends React.Component{
         return (
                 <div>
                     <h1>Login</h1>
-                    <LoginForm onSubmit={this.submit}/>
+                    <LoginForm captcha={this.props.captcha} onSubmit={this.submit}/>
                 </div>  
         )
     }
@@ -33,7 +33,8 @@ class Login extends React.Component{
 
 let mapStateToProps = (state) => {
     return{
-        isAuth:state.auth.isAuth
+        isAuth:state.auth.isAuth,
+        captcha:state.auth.captcha
     }
 }
 

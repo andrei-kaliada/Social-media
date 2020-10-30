@@ -1,5 +1,6 @@
 import {autAPI} from '../api/api';
 const GET_AUTH = 'GET_AUTH';
+const SET_CAPTCHA = 'SET_CAPTCHA';
 // const LOG_OUT_AUTH = 'LOG_OUT_AUTH';
 
 
@@ -8,7 +9,8 @@ let initialState = {
     email: null,
     login: null,
     isFetching:false,
-    isAuth:false
+    isAuth:false,
+    captcha:null
 }
 
 
@@ -20,6 +22,11 @@ const authReducer = (state = initialState, action) => {
             return{
                 ...state,   
                 ...action.payload,
+            }
+        case SET_CAPTCHA:
+            return{
+                ...state,
+                captcha:action.captcha
             }
         default: return state;
     }
@@ -35,6 +42,13 @@ export const getAuth = (id,login,email,isAuth) => {
             login,
             isAuth
         }
+    }
+}
+
+export const setCaptcha = (captcha) =>{
+    return {
+        type:SET_CAPTCHA,
+        captcha
     }
 }
 
