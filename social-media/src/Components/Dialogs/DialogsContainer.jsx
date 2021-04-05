@@ -1,7 +1,7 @@
 
 import "./Dialogs.scss";
 import Dialogs from './Dialogs';
-import {addMessageActionCreator } from '../../redux/dialogs-reducer';
+import {addMessageActionCreator } from '../../redux/dialogs-reducer.ts';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {reset} from 'redux-form';

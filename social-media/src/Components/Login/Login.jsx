@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginForm from './LoginForm';
-import {logIn} from '../../redux/login-reducer';
+import {logIn} from '../../redux/login-reducer.ts';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 import { Redirect } from 'react-router';

@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import ProfileInfo from "./ProfileInfo/ProfileInfo.tsx";
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import './Profile.scss';
 

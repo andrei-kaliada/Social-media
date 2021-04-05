@@ -3,7 +3,7 @@ import userPhoto from '../../assets/images/unnamed.png';
 // import classNames from 'classnames/bind';
 import './Users.scss';
 import { NavLink } from 'react-router-dom';
-import Paginator from '../common/Paginator/Paginator';
+import Paginator from '../common/Paginator/Paginator.tsx';
 
 
 let Users = ({unFollowUser, followUser, isDisabledBtn, element:{id,name, status, photos, followed }}) =>{

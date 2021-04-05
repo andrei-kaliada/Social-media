@@ -2,7 +2,7 @@ import { loginAPI } from '../api/api';
 import { authThunk, logOutAuthThunk, setCaptcha } from './auth-reduser';
 import { stopSubmit } from 'redux-form';
 
-export const logIn = (dataLogin) => async (dispatch) => {
+export const logIn = (dataLogin:any) => async (dispatch:any) => {
     
     let response = await loginAPI.logIn(dataLogin);
   
@@ -19,7 +19,7 @@ export const logIn = (dataLogin) => async (dispatch) => {
 }
 
 
-export const logOut = () => async (dispatch) => {
+export const logOut = () => async (dispatch:any) => {
 
     let response = await loginAPI.logOut()
     if (response.resultCode === 0) {

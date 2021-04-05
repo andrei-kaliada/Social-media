@@ -5,9 +5,24 @@ import './Users.scss';
 import { NavLink } from 'react-router-dom';
 import Paginator from '../common/Paginator/Paginator';
 import User from './User';
+import { UsersType } from '../../../types/types';
 
 
-let Users = ({props, requestUsers, followUser,unFollowUser}) =>{
+type UsersPropTypes = {
+    users:Array<UsersType>, 
+    pageSize:number,
+    totalUsersCount:number,
+    currentPage:number,
+    isFetching:boolean,
+    isDisabledBtn:Array<number>,
+    requestUsers:(page:number)=>void,
+    followUser:(id:number)=>void,
+    sortUsers:()=>void,
+    unFollowUser:(id:number)=>void,
+    props:any
+}
+
+let Users: React.FC<UsersPropTypes> = ({ requestUsers, followUser,unFollowUser,...props}) =>{
 
     let { users, pageSize,
         totalUsersCount, currentPage,isFetching,

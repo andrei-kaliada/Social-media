@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ProfileInfo.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import unnamedUserPhoto from "../../../assets/images/unnamed.png";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatus from "./ProfileStatus.ts";
 import { IconButton } from "@material-ui/core";
 import { PhotoCamera } from "@material-ui/icons";
 import Modal from "@material-ui/core/Modal";
@@ -44,7 +44,7 @@ const ProfileInfo = ({
   updateProfileData,
 }) => {
   const classes = useStyles();
-  const [editMode, setEditMode] = React.useState(false);
+  const [editMode, setEditMode] = React.useState<boolean>(false);
 
  
 

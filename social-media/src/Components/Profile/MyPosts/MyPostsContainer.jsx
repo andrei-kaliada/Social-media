@@ -1,7 +1,7 @@
 import './MyPosts.scss';
 import MyPosts from './MyPosts';
 import {connect} from 'react-redux';
-import { addPostActionCreator,reverseMessages } from '../../../redux/profile-reducer';
+import { addPostActionCreator,reverseMessages } from '../../../redux/profile-reducer.ts';
 import { reset } from 'redux-form';
 
 

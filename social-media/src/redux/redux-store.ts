@@ -18,6 +18,11 @@ let reducers = combineReducers({
                     form:formReducer,
                     appInit:appReducer,
 })
+
+type RootReducerType = typeof reducers;
+export type AppStateType = ReturnType<RootReducerType>;
+
+//@ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 let store = createStore(reducers, 

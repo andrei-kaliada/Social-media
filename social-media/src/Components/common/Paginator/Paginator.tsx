@@ -13,9 +13,17 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+  type PaginatorPropsType = {
+    requestUsers:(page:number) => void,
+    portionSize?:number,
+    pageSize:number,
+    currentPage:number,
+    totalUsersCount:number
+  }
 
-let Paginator = ({ requestUsers, portionSize = 10, ...props }) => {
-    const [portionNumber, setPortionNumber] = useState(1);
+
+let Paginator: React.FC<PaginatorPropsType> = ({ requestUsers, portionSize = 10, ...props }) => {
+    let [portionNumber, setPortionNumber] = useState<number>(1);
 
 
     let { pageSize,
@@ -24,7 +32,7 @@ let Paginator = ({ requestUsers, portionSize = 10, ...props }) => {
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
 
-    let pages = [];
+    let pages: Array<number> = [];
 
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);

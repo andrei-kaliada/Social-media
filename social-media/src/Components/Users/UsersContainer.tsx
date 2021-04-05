@@ -4,12 +4,44 @@ import Users from './Users';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import withAuthRedirect from '../../hoc/withAuthRedirect';
+//@ts-ignore
 import {getUsersSelect, getPageSize,
      getTotalUsersCount, getCurrentPage,
       getIsFetching ,getIsDisabledBtn} from '../../redux/users-selectors';
+import { UsersType } from '../../../types/types';
+import { AppStateType } from '../../redux/redux-store';
 
 
-class UsersContainer extends React.Component {
+
+type MapStateToPropsType = {
+    currentPage:number,
+    pageSize:number,
+    users:Array<UsersType>, 
+    totalUsersCount:number,
+    isFetching:boolean,
+    isDisabledBtn:Array<number>,
+
+}
+
+type MapDispatchToPropsType = {
+
+    getUsers:(currentPage:number, pageSize:number)=>void,
+    followThunk:(id:number)=>void,
+    unFollowThunk:(id:number)=>void,
+    sortUsers:()=>void,
+   
+
+}
+
+type OwnPropsType = {
+    title:string
+}
+
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType;
+
+
+class UsersContainer extends React.Component <PropsType> {
     
 
     componentDidMount() {
@@ -18,20 +50,20 @@ class UsersContainer extends React.Component {
         this.props.getUsers(currentPage,pageSize);
     }
 
-    requestUsers = (element) =>{
+    requestUsers = (page:number) =>{
        const {pageSize} = this.props;
       
-        this.props.getUsers(element,pageSize);
+        this.props.getUsers(page,pageSize);
   
     }
 
-    followUser = (id) => {
+    followUser = (id:number) => {
         
         this.props.followThunk(id);
         
     }
 
-    unFollowUser = (id) => {
+    unFollowUser = (id:number) => {
        this.props.unFollowThunk(id);
         
     }
@@ -40,13 +72,20 @@ class UsersContainer extends React.Component {
 
 
     render() {
+        const {currentPage, pageSize,sortUsers,users,totalUsersCount,isFetching,isDisabledBtn} = this.props;
         return (
             <Users
              props={this.props}
+             isDisabledBtn={isDisabledBtn}
+             isFetching={isFetching}
+             currentPage={currentPage}
+             totalUsersCount={totalUsersCount}
+             users={users}
+             pageSize={pageSize}
              requestUsers={this.requestUsers}
              followUser={this.followUser}
              unFollowUser={this.unFollowUser}
-             sortUsers={this.sortUsers}
+             sortUsers={sortUsers}
             />
         );
     };
@@ -63,7 +102,7 @@ class UsersContainer extends React.Component {
 //     }
 // }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state:AppStateType): MapStateToPropsType => {
     return{
         users:getUsersSelect(state),
         pageSize:getPageSize(state),
@@ -78,7 +117,7 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, {getUsers,followThunk,unFollowThunk, sortUsers}),
+    connect<MapStateToPropsType,MapDispatchToPropsType,OwnPropsType,AppStateType>(mapStateToProps, {getUsers,followThunk,unFollowThunk, sortUsers}),
     withAuthRedirect,
     )
     (UsersContainer);

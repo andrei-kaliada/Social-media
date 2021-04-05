@@ -1,6 +1,6 @@
-import dialogsReducer from '../redux/dialogs-reducer'; 
-import profileReducer from '../redux/profile-reducer'; 
-import sidebarReducer from '../redux/sidebar-reducer'; 
+import dialogsReducer from '../redux/dialogs-reducer.ts'; 
+import profileReducer from '../redux/profile-reducer.ts'; 
+import sidebarReducer from '../redux/sidebar-reducer.ts'; 
 
 let store = {
 

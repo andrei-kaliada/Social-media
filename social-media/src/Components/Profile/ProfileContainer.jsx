@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {setUserProfile, profileThunk, getUserStatus, updateUserStatus, updateProfilePhoto, updateProfileData} from '../../redux/profile-reducer';
+import {setUserProfile, profileThunk, getUserStatus, updateUserStatus, updateProfilePhoto, updateProfileData} from '../../redux/profile-reducer.ts';
 import { withRouter, Redirect } from "react-router";
 import withAuthRedirect  from '../../hoc/withAuthRedirect';
 

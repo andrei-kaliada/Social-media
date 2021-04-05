@@ -1,4 +1,5 @@
 import { usersAPI, profileAPI } from '../api/api';
+import {PostsType,ContactsType,PhotosType,ProfileType} from '../../types/types';
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const NEW_USER_PROFILE = 'NEW_USER_PROFILE';
@@ -15,14 +16,16 @@ let initialState = {
         { id: 1, message: 'Hi, how are you?', likeCount: 12 },
         { id: 2, message: 'Hello', likeCount: 11 },
         { id: 3, message: 'I am fine', likeCount: 10 },
-    ],
-    newPostsText: 'Something',
-    userProfileData: null,
-    status: "",
-    isFetching:false
+    ] as Array<PostsType>,
+    newPostsText: 'Something' as String,
+    userProfileData: null as ProfileType | null,
+    status: "" as string,
+    isFetching:false as boolean
 };
 
-const profileReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const profileReducer = (state = initialState, action:any): InitialStateType => {
 
     switch (action.type) {
         case ADD_POST:
@@ -31,6 +34,7 @@ const profileReducer = (state = initialState, action) => {
                 posts: [...state.posts, {
                     id: state.posts.length + 1,
                     message: action.text,
+                    likeCount:0
                 }],
                 newPostsText: '',
             }
@@ -70,7 +74,7 @@ const profileReducer = (state = initialState, action) => {
                 userProfileData:{
                     ...state.userProfileData,
                     photos:action.photos
-                }
+                } as ProfileType
             }
         case SET_PROFILE_DATA:
             return{
@@ -81,85 +85,128 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const deletePost = (id) => {
+type DeletePostType = {
+    type: typeof DELETE_POST,
+    id:number
+}
+
+export const deletePost = (id:number): DeletePostType => {
     return{
         type:DELETE_POST,
         id
     }
 }
 
-export const reverseMessages = () => {
+type ReverseMessages = {
+    type: typeof REVERCE_MESSAGES
+}
+
+export const reverseMessages = () : ReverseMessages => {
     return {
         type:REVERCE_MESSAGES
     }
 }
 
+type AddPostActionCreatorType = {
+    type: typeof ADD_POST,
+    text: string
+    
+}
 
-export const addPostActionCreator = (text) => {
+export const addPostActionCreator = (text:string): AddPostActionCreatorType => {
     return {
         type: ADD_POST,
         text
     }
 }
 
-export const updateNewPostTextActionCreator = (text) => {
+type UpdateNewPostTextActionCreatorType = {
+    type: typeof UPDATE_NEW_POST_TEXT,
+    newText: string
+}
+
+export const updateNewPostTextActionCreator = (text:string): UpdateNewPostTextActionCreatorType => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: text,
     }
 }
 
-export const setUserProfile = (userData) => {
+type SetUserProfileType = {
+    type: typeof NEW_USER_PROFILE,
+    userData:ProfileType
+}
+
+export const setUserProfile = (userData:ProfileType):SetUserProfileType => {
     return {
         type: NEW_USER_PROFILE,
         userData
     }
 }
 
+type SetStatusString = {
+    type: typeof SET_STATUS,
+    status:string
+}
 
-export const setStatus = (status) => {
+export const setStatus = (status:string) : SetStatusString => {
     return {
         type: SET_STATUS,
         status
     }
 }
 
-export const changeFetching = (isFetching) => {
+type changeFetchingType = {
+    type: typeof CHANGE_FETCHING,
+    isFetching: boolean
+}
+
+export const changeFetching = (isFetching:boolean): changeFetchingType => {
     return{
         type:CHANGE_FETCHING,
         isFetching
     }
 }
 
-export  const savePhotoSuccess = (photos) => {
+type SavePhotoSuccessType = {
+    type: typeof SAVE_PHOTO_SUCCESS,
+    photos:PhotosType
+} 
+
+export  const savePhotoSuccess = (photos:PhotosType):SavePhotoSuccessType => {
  
     return{
-        type:'SAVE_PHOTO_SUCCESS',
+        type:SAVE_PHOTO_SUCCESS,
         photos
     }
 }
 
-export const setProfileData = (data) => {
+type SetProfileDataType = {
+    type:typeof SET_PROFILE_DATA,
+    data:ProfileType
+}
+
+export const setProfileData = (data:ProfileType):SetProfileDataType => {
     return{
-        type:"SET_PROFILE_DATA",
+        type:SET_PROFILE_DATA,
         data
     }
 }
 
-export const profileThunk = (userId) => async (dispatch) => {
+export const profileThunk = (userId:number) => async (dispatch:any) => {
 
     let dataUser = await usersAPI.profile(userId)
         dispatch(setUserProfile(dataUser));
 }
 
-export const getUserStatus = (userId) => async (dispatch) => {
+export const getUserStatus = (userId:number) => async (dispatch:any) => {
     let dataGetStatus = await profileAPI.getStatus(userId)
     dispatch(setStatus(dataGetStatus))
 }
 
 
 
-export const updateUserStatus = (status) => async (dispatch) => {
+export const updateUserStatus = (status:string) => async (dispatch:any) => {
     dispatch(changeFetching(true));
     let dataUpdateStatus = await profileAPI.updateStatus(status)
     if(dataUpdateStatus.data.resultCode === 0){
@@ -169,7 +216,7 @@ export const updateUserStatus = (status) => async (dispatch) => {
 
 }
 
-export const updateProfilePhoto = (image) => async (dispatch) => {
+export const updateProfilePhoto = (image:any) => async (dispatch:any) => {
     let response = await profileAPI.updatePhoto(image);
 
     if(response.resultCode === 0){
@@ -178,7 +225,7 @@ export const updateProfilePhoto = (image) => async (dispatch) => {
     }
 }
 
-export const updateProfileData = (dataProfile,userId) => async (dispatch,getState) =>{
+export const updateProfileData = (dataProfile:ProfileType,userId:number) => async (dispatch:any,getState:any) =>{
     
     const id = getState().auth.userId;
 

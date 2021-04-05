@@ -2,13 +2,16 @@ import { authThunk } from './auth-reduser';
 const GET_AUTH = 'GET_AUTH';
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
+export type InitialStateType = {
+    initialized:boolean,
+}
 
-let initialState = {
+let initialState: InitialStateType = {
     initialized: false,
 }
 
 
-const appReducer = (state = initialState, action) => {
+const appReducer = (state = initialState, action:any): InitialStateType => {
 
     switch (action.type) {
         case INITIALIZED_SUCCESS:
@@ -22,26 +25,21 @@ const appReducer = (state = initialState, action) => {
 }
 
 
-export const getAuth = (id, login, email, isAuth) => {
-    return {
-        type: GET_AUTH,
-        payload: {
-            id,
-            email,
-            login,
-            isAuth
-        }
-    }
+
+
+
+type InitializedSuccessActionType = {
+    type: typeof INITIALIZED_SUCCESS
 }
 
 
-export let initializedSuccess = () => {
+export let initializedSuccess = () : InitializedSuccessActionType => {
     return {
         type: INITIALIZED_SUCCESS
     }
 }
 
-export let initializApp = () => async (dispatch) => {
+export let initializApp = () => async (dispatch:any) => {
 
     let promise = await dispatch(authThunk());
 

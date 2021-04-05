@@ -5,7 +5,16 @@ import {logOut} from '../../redux/login-reducer';
 import Header from './Header';
 import {compose} from 'redux';
 
-class HeaderContainer extends React.Component{
+type PropsTypes ={
+    id:number,
+    email:string,
+    login:string,
+    isAuth:boolean,
+}
+
+
+
+class HeaderContainer extends React.Component<PropsTypes>{
  
 
 

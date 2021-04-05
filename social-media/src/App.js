@@ -3,16 +3,16 @@ import './App.scss';
 import 'normalize.css';
 import Nav from './Components/Navigation/Nav';
 import ProfileContainer from './Components/Profile/ProfileContainer';
-import HeaderContainer from './Components/Header/HeaderContainer';
+import HeaderContainer from './Components/Header/HeaderContainer.ts';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import { withRouter } from "react-router";
-import {initializApp} from './redux/app-reducer';
+import {initializApp} from './redux/app-reducer.ts';
 import LazyLoad from './hoc/LazyLoad';
 
 const DialogsContainer = React.lazy(() =>  import('./Components/Dialogs/DialogsContainer'));
-const UsersContainer = React.lazy(() =>  import('./Components/Users/UsersContainer'));
+const UsersContainer = React.lazy(() =>  import('./Components/Users/UsersContainer.tsx'));
 const Login = React.lazy(() =>  import('./Components/Login/Login'));
 
 

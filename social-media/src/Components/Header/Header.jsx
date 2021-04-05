@@ -21,7 +21,7 @@ import LogoSvg from '../../assets/images/logo.svg';
             
                    <div className="header-btn">
                    { props.isAuth ? 
-                      <div class="header-btn__logout">
+                      <div className="header-btn__logout">
                         <p>{props.login}</p>
                         <div>
                         <Button onClick={props.logOut} variant="contained" color="primary">

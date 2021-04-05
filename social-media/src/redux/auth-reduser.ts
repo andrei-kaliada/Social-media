@@ -4,17 +4,19 @@ const SET_CAPTCHA = 'SET_CAPTCHA';
 // const LOG_OUT_AUTH = 'LOG_OUT_AUTH';
 
 
+export type InitialStateType = typeof initialState;
+
 let initialState = {
-    id: null,
-    email: null,
-    login: null,
+    id: null as number | null,
+    email: null as string | null,
+    login: null as string | null,
     isFetching:false,
     isAuth:false,
-    captcha:null
+    captcha:null as object | null
 }
 
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action:any):InitialStateType => {
    
     switch(action.type){
         case GET_AUTH:
@@ -33,10 +35,23 @@ const authReducer = (state = initialState, action) => {
 }
 
 
-export const getAuth = (id,login,email,isAuth) => {
+type GetAuthPayloadType = {
+    id:number | null,
+    email:string | null,
+    login:string | null,
+    isAuth:boolean
+}
+
+type GetAuthType = {
+    type: typeof GET_AUTH,
+    payload: GetAuthPayloadType
+}
+
+
+export const getAuth = (id:number | null, login:string | null, email:string | null, isAuth:boolean): GetAuthType => {
     return {
-        type:GET_AUTH,
-        payload:{
+        type: GET_AUTH,
+        payload: {
             id,
             email,
             login,
@@ -45,7 +60,12 @@ export const getAuth = (id,login,email,isAuth) => {
     }
 }
 
-export const setCaptcha = (captcha) =>{
+type SetCaptchaType = {
+    type: typeof SET_CAPTCHA,
+    captcha:object
+}
+
+export const setCaptcha = (captcha:object): SetCaptchaType =>{
     return {
         type:SET_CAPTCHA,
         captcha
@@ -54,7 +74,7 @@ export const setCaptcha = (captcha) =>{
 
 
 
-export const authThunk = () => async (dispatch) => {
+export const authThunk = () => async (dispatch: any) => {
   
    let response = await autAPI.auth()
    if(response.resultCode === 0){
@@ -67,7 +87,7 @@ export const authThunk = () => async (dispatch) => {
 }
 
 
-export const logOutAuthThunk = () => async (dispatch) => {
+export const logOutAuthThunk = () => async (dispatch:any) => {
   
     let response = await autAPI.auth()
     if(response.resultCode === 1){
